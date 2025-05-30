@@ -241,9 +241,28 @@ body {
 .transition-custom {
   transition: all 1s ease;
 }
+.transition-custom-5 {
+  transition: all 0.3s ease;
+}
 .hiddenShowAddreas {
   bottom: 100%;
   position: hidden;
   opacity: 0;
   transition: all 1s ease-out;
+}
+
+#wrapper-answer__comment{
+  transition: 0.5s ease;
+}
+
+.answer__comment{
+
+}
+
+.scroll-button{
+
+}
+
+html {
+  scroll-behavior: smooth;
 }

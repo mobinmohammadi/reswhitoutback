@@ -1,13 +1,10 @@
 import React from "react";
 
-export default function CommentsAnswerBox({datetime , reply }) {
-     const {name , text , avatar} = reply   
-    console.log(reply.text);
-    
+export default function CommentsAnswerBox({ datetime, reply }) {
+  const { name, text, avatar } = reply;
 
-    
-    return (
-    <div className="bg-zinc-700 p-3 mt-5 rounded-md">
+  return (
+    <div className="bg-zinc-700 p-3 mt-5 rounded-md border-r-5  border-green-600 border-solid">
       <div className="flex justify-between pl-5 border-b border-solid pb-2 border-slate-100 ">
         <div className="">
           <div className="flex gap-2 ">
@@ -24,8 +21,8 @@ export default function CommentsAnswerBox({datetime , reply }) {
             <div className="flex flex-col text-white gap-[3px] items-right justify-center">
               <span className="text-white font-bold text-sm">{name}</span>
               <div className="text-x flex flex-col text-slate-300">
-                <span className=""> تاریخ : {datetime.slice(0,10)}</span>
-                <span>ساعت : {datetime.slice(10,15)} </span>
+                <span className=""> تاریخ : {datetime.slice(0, 10)}</span>
+                <span>ساعت : {datetime.slice(10, 15)} </span>
               </div>
             </div>
           </div>

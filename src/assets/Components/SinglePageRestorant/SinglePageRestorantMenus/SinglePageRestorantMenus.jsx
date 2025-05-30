@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import MoreFoodsBoxes from "../../MoreFoodsRestorant/MoreFoodsBoxes/MoreFoodsBoxes";
 
-export default function SinglePageRestorantMenu({setArrayUserBasket , arrayUserBasket }) {
+export default function SinglePageRestorantMenu({dataSingleResturants}) {
+  const allMenuSinglePageRestorants = dataSingleResturants.menu;
+  
+  
   const [menusResturants, setMenusResturants] = useState([]);
   // useEffect(() => {
   //   fetch(`${BaseUrl}/restaurants`)
@@ -30,9 +33,9 @@ export default function SinglePageRestorantMenu({setArrayUserBasket , arrayUserB
           <use href="#magnifying-glass"></use>
         </svg>
       </div>
-      <div className=" grid grid-cols-1 sm:grid-cols-2   xl:grid-cols-3 gap-3">
-        {menusResturants.map((menu) => (
-          <div onClick={() => handle(menu.id)} className="">
+      <div className=" grid grid-cols-1 sm:grid-cols-2   xl:grid-cols-3 w-[97%] sm:w-auto gap-3">
+        {allMenuSinglePageRestorants?.map((menu) => (
+          <div key={menu.id} onClick={() => handle(menu.id)} className="">
             <MoreFoodsBoxes {...menu} />
           </div>
         ))}

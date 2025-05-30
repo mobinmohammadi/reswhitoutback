@@ -2,8 +2,12 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-export default function BasicMap({ cityCoordinates, name }) {
-  const position = [36.7631 , 45.7222]; // مختصات مهاباد
+export default function BasicMap({dataSingleResturants}) {
+
+  const {name , location} = dataSingleResturants
+  
+
+  const position = location; // مختصات مهاباد
 
   return (
     <MapContainer

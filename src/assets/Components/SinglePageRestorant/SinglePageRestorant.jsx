@@ -31,6 +31,7 @@ export default function SinglePageRestorant() {
 
   }, [allRestorants, paramsID]);
   
+  
   // useEffect(() => {
   //   fetch(`${baseUrl}/restaurants/${paramsID.ResoruntID}`)
   //     .then((res) => res.json())
@@ -84,12 +85,13 @@ export default function SinglePageRestorant() {
       ) : null}
       {statusMenuShow == "resturants-menu" ? (
         <SinglePageRestorantMenu
-          arrayUserBasket={arrayUserBasket}
-          setArrayUserBasket={setArrayUserBasket}
-          dataSingleResturants={dataSingleResturants}
+            dataSingleResturants={dataSingleResturants}
+          // arrayUserBasket={arrayUserBasket}
+          // setArrayUserBasket={setArrayUserBasket}
+          // dataSingleResturants={dataSingleResturants}
         />
       ) : null}
-      {statusMenuShow == "resturants-infos" ? <AddressRestorant /> : null}
+      {statusMenuShow == "resturants-infos" ? <AddressRestorant dataSingleResturants={dataSingleResturants}  /> : null}
 
       <div className="mt-2">
         <FooterPc />

@@ -7,6 +7,8 @@ import SwalBox from "../../SwalBox/SwalBox";
 // import CkEditor from "../../CkEditor/CkEditor"
 
 export default function CommentsSections({ name, allComments }) {
+  const [nameCreatorComment, setNameCreatorComment] = useState("");
+  const wrapperTextAreaComments = useRef(null)
   // const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const [visibleComments, setVisibleComments] = useState(3);
@@ -18,16 +20,19 @@ export default function CommentsSections({ name, allComments }) {
   //   useState(false);
 
   const showBoxesForAddComments = () => {
-    boxForAddComments.current.className =
-      "container-foods opacity-100 visible mt-5 transition-all";
-    // boxForAddComments.current
+    boxForAddComments.current.classList.add("opacity-100", "visible", "mt-5" , "h-full");
+    wrapperTextAreaComments.current.classList.add("h-full")
   };
   const hiddenBoxesForAddComments = () => {
-    boxForAddComments.current.className = "container-foods mb-3 transition-all";
-    setTimeout(() => {
-      boxForAddComments.current.className = "container-foods opacity-0 hidden";
-    }, 50);
-    // boxForAddComments.current
+    boxForAddComments.current.classList.remove("opacity-100", "h-full");
+    boxForAddComments.current.classList.add("opacity-0", "mb-0");
+    wrapperTextAreaComments.current.classList.remove("h-full")
+
+  };
+
+  const cancellHandelForComments = () => {
+    hiddenBoxesForAddComments();
+    setNameCreatorComment("");
   };
 
   // const changeValueCommentBody = (e) => {
@@ -83,6 +88,20 @@ export default function CommentsSections({ name, allComments }) {
   const allFoodsCommentToShown = visibleComments >= allComments.length;
 
   const productsToShow = allComments.slice(0, visibleComments);
+
+
+
+  // ============  Calculator Rating Comments ===================
+
+    const allComment = allComments.map(item => item.score)
+    const resultAllRatingOfComments = allComment.reduce((acc ,num) => acc+ num , 0)
+    const failayScoreCommenst = resultAllRatingOfComments / allComment.length
+    
+    
+    
+
+
+  // ============================================================
   return (
     <>
       <svg className="hidden">
@@ -116,7 +135,7 @@ export default function CommentsSections({ name, allComments }) {
           />
         </symbol>
       </svg>
-      <div className="bg-white pb-5 relative  ">
+      <div id="wrapper-answer__comment" className="answer__comment bg-white pb-5 relative  ">
         <div className="flex items-center  justify-between mr-6 ml-6 bg-green-600 text-white pl-3 pr-3 mt-5 rounded-md">
           <div className="flex items-center justify-center mt-5 ">
             <span className=" block pl-3 font-bold text-[12px] sm:text-[18px] pb-5 pr-5">
@@ -133,51 +152,61 @@ export default function CommentsSections({ name, allComments }) {
             </svg>
           </div>
         </div>
-        <div
-          ref={boxForAddComments}
-          className="container-foods opacity-0 hidden mt-4"
-        >
-          <div className="flex gap-2 items-center ">
-            <div className=" border-5 w-15 h-15 flex items-center justify-center border-slate-200 border-solid rounded-full">
-              <svg className="w-12 h-12">
-                <use href="#person"></use>
+        <div ref={wrapperTextAreaComments} className="h-0 transition-all overflow-hidden"> 
+          <div
+            ref={boxForAddComments}
+            className="container-foods opacity-0 h-24 overflow-hidden transition-custom-5 mt-4"
+          >
+            <div className="flex gap-2 items-center ">
+              <div className=" border-5 w-15 h-15 flex items-center justify-center border-slate-200 border-solid rounded-full">
+                <svg className="w-12 h-12">
+                  <use href="#person"></use>
+                </svg>
+              </div>
+              {nameCreatorComment.length ? (
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs sm:text-sm">
+                    پاسخ کاربر مهمان به {nameCreatorComment}
+                  </span>
+                  <span className="text-x sm:text-xs mr-2">پاسخ به کامنت</span>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-1">
+                  <span className="text-sm">کاربر مهمان</span>
+                  <span className="text-xs mr-2">ثبت کامنت جدید</span>
+                </div>
+              )}
+            </div>
+            <div className="bg-red-500 items-center  flex gap-2  text-white w-full mt-2 rounded-md pt-2 pb-2 pr-2">
+              <svg className="w-8 h-8 sm:w-6 sm:h-6 text-zinc-800 ">
+                <use href="#exclamation-triangle"></use>
               </svg>
+              <span className="mt-1 text-xs leading-5 sm:text-sm">
+                لطفا کامنت خود را اععم از کلمات توهین درج نمایید در والا غیر بن
+                خواهید شد ❌
+              </span>
             </div>
-
-            <div className="flex flex-col gap-1">
-              <span className="text-sm">کاربر مهمان</span>
-              <span className="text-xs mr-2">ثبت کامنت جدید</span>
+            <textarea
+              // value={newTextComments}
+              // onChange={(e) => changeValueCommentBody(e)}
+              className="h-44 sm:h-60 bg-slate-200  mt-2 rounded-md w-full pt-2 pr-2 outline-green-600"
+              name=""
+              id=""
+            ></textarea>
+            <div className="sm:text-md mt-2 transition-all flex gap-3 sm:gap-5 float-end & > *:rounded-md & > *:pr-10  & > *:pl-10  & > *:pt-2  & > *:pb-2">
+              <button
+                onClick={() => cancellHandelForComments()}
+                className="border-2 border-solid w-24 flex items-center justify-center text-[14px] sm:w-32 text-green-500 hover:bg-green-100 cursor-pointer border-green-500"
+              >
+                لغو
+              </button>
+              <button
+                // onClick={(e) => newCommentsForRestourants(e)}
+                className="bg-green-500 border-2 w-24 flex items-center justify-center text-[14px] sm:w-32  border-solid  border-green-500 cursor-pointer hover:bg-green-600  text-white"
+              >
+                ارسال
+              </button>
             </div>
-          </div>
-          <div className="bg-red-500 items-center  flex gap-2  text-white w-full mt-2 rounded-md pt-2 pb-2 pr-2">
-            <svg className="w-8 h-8 sm:w-6 sm:h-6 text-zinc-800 ">
-              <use href="#exclamation-triangle"></use>
-            </svg>
-            <span className="mt-1 text-xs leading-5 sm:text-sm">
-              لطفا کامنت خود را اععم از کلمات توهین درج نمایید در والا غیر بن
-              خواهید شد ❌
-            </span>
-          </div>
-          <textarea
-            // value={newTextComments}
-            // onChange={(e) => changeValueCommentBody(e)}
-            className="h-44 sm:h-60 bg-slate-200  mt-2 rounded-md w-full pt-2 pr-2 outline-green-600"
-            name=""
-            id=""
-          ></textarea>
-          <div className="sm:text-md mt-2 transition-all flex gap-3 sm:gap-5 float-end & > *:rounded-md & > *:pr-10  & > *:pl-10  & > *:pt-2  & > *:pb-2">
-            <button
-              onClick={() => hiddenBoxesForAddComments()}
-              className="border-2 border-solid w-24 flex items-center justify-center text-[14px] sm:w-32 text-green-500 hover:bg-green-100 cursor-pointer border-green-500"
-            >
-              لغو
-            </button>
-            <button
-              // onClick={(e) => newCommentsForRestourants(e)}
-              className="bg-green-500 border-2 w-24 flex items-center justify-center text-[14px] sm:w-32  border-solid  border-green-500 cursor-pointer hover:bg-green-600  text-white"
-            >
-              ارسال
-            </button>
           </div>
         </div>
 
@@ -200,7 +229,12 @@ export default function CommentsSections({ name, allComments }) {
             </svg>
           </div>
           <div className="flex mb-2 gap-2 items-center  border-1 pt-1 pb-1 pr-3 pl-3 rounded-4xl border-[#dddddd]">
-            <span className="text-zinc-800 text-sm font-bold">3.8</span>
+            
+            <div className="flex gap-1    ">
+
+            <span className="text-slate-400 text-sm font-bold"> 5 / </span>
+            <span className="text-zinc-800 text-sm font-bold">{failayScoreCommenst.toFixed(1)}</span>
+            </div>
             <div className="text-slate-400 text-x">
               <span>( {allComments.length} </span>
               <span>نظر)</span>
@@ -209,16 +243,21 @@ export default function CommentsSections({ name, allComments }) {
           <div className="">
             <div>
               <i></i>
-              <ProgressBar value={"70"} icons="😊" count="7" />
-              <ProgressBar value={"30"} icons="😐" count="4" />
-              <ProgressBar value={"10"} icons="😡" count="2" />
+              <ProgressBar value={"10"} icons="😍" count="2" />
+              <ProgressBar value={"10"} icons="🤗" count="2" />
+              <ProgressBar value={"10"} icons="😐" count="2" />
+              <ProgressBar value={"30"} icons="😡" count="4" />
+              <ProgressBar value={"70"} icons="🤬" count="7" />
             </div>
           </div>
         </div>
         {productsToShow.map((comment) => (
           <div className="rounded-md overflow-hidden m-4  shadow-[box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;  ]">
-
-            <CommentsBoxes {...comment} />
+            <CommentsBoxes
+              showBoxesForAddComments={showBoxesForAddComments}
+              setNameCreatorComment={setNameCreatorComment}
+              {...comment}
+            />
           </div>
         ))}
 

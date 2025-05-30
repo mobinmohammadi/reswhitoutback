@@ -1,7 +1,9 @@
 import React from "react";
 import BasicMap from "../../BasicMap/BasicMap";
 
-export default function AddressRestorant() {
+export default function AddressRestorant({dataSingleResturants}) {
+
+  const {city} = dataSingleResturants
   return (
     <div className="flex flex-col gap-5 pt-5 pb-5 pr-5 justify-between mr-6 ml-6 bg-white pl-3  mt-5">
       <div className="flex flex-col w-full gap-3">
@@ -13,10 +15,10 @@ export default function AddressRestorant() {
           <svg className="w-5 h-5">
             <use href="#map-pin"></use>
           </svg>
-          <span>مهاباد - بلوار فردوسی</span>
+          <span>{city}</span>
         </div>
         {/* <div className="w-full h-[230px] rounded-md bg-slate-200"> */}
-            <BasicMap  name="مهاباد"/>
+            <BasicMap  dataSingleResturants={dataSingleResturants}/>
         {/* </div> */}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-export default function MoreFoodsBoxes({ image, name, id }) {
+export default function MoreFoodsBoxes({ image, name, id , price , image_url }) {
   const [useBasket, setUserBasket] = useState([]);
   const [count, setCount] = useState(0);
 
@@ -74,7 +74,7 @@ export default function MoreFoodsBoxes({ image, name, id }) {
           <div className="flex justify-between flex-col ">
             <img
               className="w-29 h-24 2xs:w-40 rounded-2xl "
-              src={image}
+              src={image_url}
               alt=""
             />
             <div className="flex  2xs:hidden justify-center gap-1 items-center pt-2 ">
@@ -132,7 +132,7 @@ export default function MoreFoodsBoxes({ image, name, id }) {
             <div className="flex gap-2 2xs:gap-5 flex-col 2xs:flex-row items-center">
               <div className="text-[#ef4123] text-xs flex gap-[2px] ">
                 <span>قیمت از</span>
-                <span>285000</span>
+                <span>{price}</span>
                 <span>تومان</span>
               </div>
               <div className="hidden 2xs:flex cursor-pointer  gap-1  items-center">
@@ -165,7 +165,7 @@ export default function MoreFoodsBoxes({ image, name, id }) {
                       <span
                         ref={btnAddToBasket}
                         onClick={() => addToBasketHandler(id)}
-                        className=" text-xs text-center leading-5 cursor-pointer "
+                        className=" text-x text-center leading-5 cursor-pointer "
                       >
                         افزودن به سبد خرید
                       </span>
