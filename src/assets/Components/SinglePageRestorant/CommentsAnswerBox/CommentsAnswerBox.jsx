@@ -22,7 +22,7 @@ export default function CommentsAnswerBox({ datetime, reply }) {
               <span className="text-white font-bold text-sm">{name}</span>
               <div className="text-x flex flex-col text-slate-300">
                 <span className=""> تاریخ : {datetime.slice(0, 10)}</span>
-                <span>ساعت : {datetime.slice(10, 15)} </span>
+                <span>ساعت : {datetime.slice(10, 16)} </span>
               </div>
             </div>
           </div>

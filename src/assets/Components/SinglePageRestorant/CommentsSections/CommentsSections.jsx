@@ -6,7 +6,9 @@ import SeeMoreBoxes from "../../SeeMoreBoxes/SeeMoreBoxes";
 import SwalBox from "../../SwalBox/SwalBox";
 // import CkEditor from "../../CkEditor/CkEditor"
 
-export default function CommentsSections({ name, allComments }) {
+export default function CommentsSections({ dataSingleResturants, allComments }) {
+  console.log(name);
+  
   const [nameCreatorComment, setNameCreatorComment] = useState("");
   const wrapperTextAreaComments = useRef(null)
   // const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -139,7 +141,7 @@ export default function CommentsSections({ name, allComments }) {
         <div className="flex items-center  justify-between mr-6 ml-6 bg-green-600 text-white pl-3 pr-3 mt-5 rounded-md">
           <div className="flex items-center justify-center mt-5 ">
             <span className=" block pl-3 font-bold text-[12px] sm:text-[18px] pb-5 pr-5">
-              نظر کاربران درباره رستوران {name}
+              نظر کاربران درباره  {dataSingleResturants.name}
             </span>
           </div>
           <div
@@ -251,8 +253,9 @@ export default function CommentsSections({ name, allComments }) {
             </div>
           </div>
         </div>
+       
         {productsToShow.map((comment) => (
-          <div className="rounded-md overflow-hidden m-4  shadow-[box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;  ]">
+          <div className="rounded-md overflow-hidden m-4 w-[90%] sm:w-[70%] mx-auto  shadow-[box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;  ]">
             <CommentsBoxes
               showBoxesForAddComments={showBoxesForAddComments}
               setNameCreatorComment={setNameCreatorComment}
@@ -265,7 +268,7 @@ export default function CommentsSections({ name, allComments }) {
           <CommentsBoxes {...comments} />
         ))} */}
         <button
-          className="flex justify-center items-center w-full"
+          className="flex justify-center items-center w-full "
           onClick={() => {
             setTimeout(() => {
               addToVisibleComments();

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useCart } from "../../Context/Context";
 
 export default function MoreFoodsBoxes({ image, name, id , price , image_url }) {
   const [useBasket, setUserBasket] = useState([]);
@@ -34,6 +35,10 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
       setCount((prev) => prev + 1);
     }, 800);
   };
+
+
+
+
   return (
     <>
       <svg className="hidden">

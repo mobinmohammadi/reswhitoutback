@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MoreFoodsBoxes from "../../MoreFoodsRestorant/MoreFoodsBoxes/MoreFoodsBoxes";
+import { useCart } from "../../Context/Context";
 
 export default function SinglePageRestorantMenu({
   searchInMenuRestorant,
@@ -23,6 +24,7 @@ export default function SinglePageRestorantMenu({
     localStorage.setItem("userBasket", JSON.stringify(arrayUserBasket));
   };
 
+
   return (
     <div className="flex container-custom pb-5 flex-col items-center">
       <div className="flex w-full relative mr-4 ml-4 xs:mr-12 xs:ml-12  items-center pt-2 pb-2 pr-2 rounded-sm mt-5 mb-5 bg-white">
@@ -45,7 +47,7 @@ export default function SinglePageRestorantMenu({
               </div>
             ))
           : dataSingleResturantsMenus?.map((menu, index) => (
-              <div key={index + 1} onClick={() => handle(menu.id)} className="">
+              <div   key={index + 1} onClick={() => handle(menu.id)} className="">
                 <MoreFoodsBoxes {...menu} />
               </div>
             ))}

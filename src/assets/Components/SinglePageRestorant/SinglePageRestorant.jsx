@@ -86,7 +86,7 @@ export default function SinglePageRestorant() {
         </div>
       </div>
       {statusMenuShow == "resturants-comments" ? (
-        <CommentsSections allComments={allComments} />
+        <CommentsSections dataSingleResturants={dataSingleResturants} allComments={allComments} />
       ) : null}
       {statusMenuShow == "resturants-menu" ? (
         <SinglePageRestorantMenu

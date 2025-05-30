@@ -100,7 +100,7 @@ export default function HeaderRestorant({ dataSingleResturants , allComments }) 
 
         <span className="absolute  w-full z-10 h-full bg-black/40 top-0 right-0"></span>
         <div className="absolute  h-full top-0 flex pl-10 w-full flex-col">
-          <div className="absolute  top-5 & > *:border & > *:flex & > *:items-center  & > *:xs:text-sm & > *:cursor-pointer pr-12 pl-12 text-white &> *:pt-1 &> *:pb-1  &> *:pl-4  &> *:pr-4 z-20  &> *:rounded-sm &> *:text-bold   flex justify-between w-full  ">
+          <div className="absolute  top-5 & > *:border & > *:flex & > *:items-center  & > *:xs:text-sm & > *:cursor-pointer pr-5 pl-5 text-white &> *:pt-1 &> *:pb-1  &> *:pl-4  &> *:pr-4 z-20  &> *:rounded-sm &> *:text-bold   flex justify-between w-full  ">
             <div className="flex gap-1 transition-all hover:bg-[#ef4123]">
               <svg className="w-6 h-6 ">
                 <use href="#heart"></use>
