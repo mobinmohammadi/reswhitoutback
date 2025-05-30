@@ -14,24 +14,21 @@ import RestorantsData from "../../../../RestorantsData.json";
 
 export default function SinglePageRestorant() {
   // const baseUrl = import.meta.env.VITE_BASE_URL;
+  const [valueForSearch, setValueForSearch] = useState("");
   const [allRestorants, setAllRestorants] = useState(RestorantsData);
 
   const paramsID = useParams().ResoruntID;
   let [dataSingleResturants, setDataSingleResturants] = useState({});
   const [allComments, setAllComments] = useState([]);
   const [arrayUserBasket, setArrayUserBasket] = useState([]);
-
   useEffect(() => {
     const foundRestorants = allRestorants.filter(
       (restoran) => restoran.id == paramsID
     );
     setDataSingleResturants(foundRestorants[0]);
     setAllComments(foundRestorants[0].comments);
-
-
   }, [allRestorants, paramsID]);
-  
-  
+
   // useEffect(() => {
   //   fetch(`${baseUrl}/restaurants/${paramsID.ResoruntID}`)
   //     .then((res) => res.json())
@@ -43,8 +40,16 @@ export default function SinglePageRestorant() {
   //   .then(res => res.json())
   //   .then(result => setAllComments(result))
   // },[])
-
   const [statusMenuShow, setStatusMenuShow] = useState("resturants-menu");
+  const [searchInMenuRestorant, setSearchInMenuRestorant] = useState([]);
+
+  const handleMenuSingleRestoranst = (e) => {
+    let filredMenu =  dataSingleResturants.menu.filter((menus) =>
+      menus.name.includes(e.target.value)
+    );
+    setSearchInMenuRestorant(filredMenu)
+  };
+
   return (
     <div className="">
       <Topbar arrayUserBasket={arrayUserBasket} />
@@ -85,13 +90,17 @@ export default function SinglePageRestorant() {
       ) : null}
       {statusMenuShow == "resturants-menu" ? (
         <SinglePageRestorantMenu
-            dataSingleResturants={dataSingleResturants}
+          searchInMenuRestorant={searchInMenuRestorant}
+          handleMenuSingleRestoranst={handleMenuSingleRestoranst}
+          dataSingleResturants={dataSingleResturants}
           // arrayUserBasket={arrayUserBasket}
           // setArrayUserBasket={setArrayUserBasket}
           // dataSingleResturants={dataSingleResturants}
         />
       ) : null}
-      {statusMenuShow == "resturants-infos" ? <AddressRestorant dataSingleResturants={dataSingleResturants}  /> : null}
+      {statusMenuShow == "resturants-infos" ? (
+        <AddressRestorant dataSingleResturants={dataSingleResturants} />
+      ) : null}
 
       <div className="mt-2">
         <FooterPc />

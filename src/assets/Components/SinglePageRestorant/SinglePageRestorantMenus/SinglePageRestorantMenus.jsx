@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import MoreFoodsBoxes from "../../MoreFoodsRestorant/MoreFoodsBoxes/MoreFoodsBoxes";
 
-export default function SinglePageRestorantMenu({dataSingleResturants}) {
-  const allMenuSinglePageRestorants = dataSingleResturants.menu;
-  
-  
+export default function SinglePageRestorantMenu({
+  searchInMenuRestorant,
+  handleMenuSingleRestoranst,
+  dataSingleResturants,
+}) {
   const [menusResturants, setMenusResturants] = useState([]);
+  const dataSingleResturantsMenus = dataSingleResturants.menu;
   // useEffect(() => {
   //   fetch(`${BaseUrl}/restaurants`)
   //     .then((res) => res.json())
@@ -13,18 +15,20 @@ export default function SinglePageRestorantMenu({dataSingleResturants}) {
   //       setMenusResturants(result);
   //     });
   // }, []);
-  
+
   const handle = (id) => {
     const result = menusResturants.filter((item) => item.id == id);
 
-    setArrayUserBasket(prev => [...prev , {...result}])
-    localStorage.setItem("userBasket" , JSON.stringify(arrayUserBasket))
+    setArrayUserBasket((prev) => [...prev, { ...result }]);
+    localStorage.setItem("userBasket", JSON.stringify(arrayUserBasket));
   };
 
   return (
     <div className="flex container-custom pb-5 flex-col items-center">
       <div className="flex w-full relative mr-4 ml-4 xs:mr-12 xs:ml-12  items-center pt-2 pb-2 pr-2 rounded-sm mt-5 mb-5 bg-white">
         <input
+          // value={valueForSearch}
+          onChange={(e) => handleMenuSingleRestoranst(e)}
           className="border-0 w-full outline-0"
           type="text"
           placeholder="جستوجو در منو ..."
@@ -34,11 +38,17 @@ export default function SinglePageRestorantMenu({dataSingleResturants}) {
         </svg>
       </div>
       <div className=" grid grid-cols-1 sm:grid-cols-2   xl:grid-cols-3 w-[97%] sm:w-auto gap-3">
-        {allMenuSinglePageRestorants?.map((menu) => (
-          <div key={menu.id} onClick={() => handle(menu.id)} className="">
-            <MoreFoodsBoxes {...menu} />
-          </div>
-        ))}
+        {searchInMenuRestorant.length
+          ? searchInMenuRestorant?.map((menu, index) => (
+              <div key={index + 1} onClick={() => handle(menu.id)} className="">
+                <MoreFoodsBoxes {...menu} />
+              </div>
+            ))
+          : dataSingleResturantsMenus?.map((menu, index) => (
+              <div key={index + 1} onClick={() => handle(menu.id)} className="">
+                <MoreFoodsBoxes {...menu} />
+              </div>
+            ))}
       </div>
     </div>
   );

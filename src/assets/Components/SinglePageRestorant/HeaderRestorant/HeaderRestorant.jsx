@@ -193,7 +193,7 @@ export default function HeaderRestorant({ dataSingleResturants , allComments }) 
               <svg className="w-5 h-5">
                 <use href="#map-pin"></use>
               </svg>
-              <span>d</span>
+              <span>{city}</span>
             </div>
           </div>
           <div className="flex flex-col gap-3">
