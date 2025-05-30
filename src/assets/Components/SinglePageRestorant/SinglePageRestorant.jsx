@@ -30,6 +30,7 @@ export default function SinglePageRestorant() {
 
 
   }, [allRestorants, paramsID]);
+  
   // useEffect(() => {
   //   fetch(`${baseUrl}/restaurants/${paramsID.ResoruntID}`)
   //     .then((res) => res.json())

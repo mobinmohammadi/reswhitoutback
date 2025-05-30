@@ -10,13 +10,13 @@ export default function SearchBoxPc() {
   const [allRestorants, setAllRestorants] = useState([]);
   let [resultSearch, setResultSearch] = useState([]);
 
-  useEffect(() => {
-    fetch(`${baseUrl}/restaurants`)
-      .then((res) => res.json())
-      .then((result) => {
-        setAllRestorants(result);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${baseUrl}/restaurants`)
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setAllRestorants(result);
+  //     });
+  // }, []);
 
   setTimeout(() => {
     setIsShowLoading(false);

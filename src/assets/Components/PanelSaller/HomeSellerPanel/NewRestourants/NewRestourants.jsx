@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import Data from "../../../../../Data";
 
 export default function NewRestourants() {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  // const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const [titleNewRestourants, setTitleNewRestourants] = useState("");
   const [locationNewRestorants, setLocationNewRestorants] = useState("");
@@ -55,66 +55,66 @@ export default function NewRestourants() {
     imageRestorants: Yup.string().required("عکس نباید خالی باشد 📸 !"),
     tagRestorants: Yup.string().required("تگ نباید خالی باشد ♻ ! "),
   });
-  const createdNewRestorants = (e, values) => {
-    const tagArray = tageFoods.map((item) => item.titleByTag);
+  // const createdNewRestorants = (e, values) => {
+  //   const tagArray = tageFoods.map((item) => item.titleByTag);
 
-    Swal.fire({
-      title: "آیا از ثبت این رستوران اطمینان دارید؟",
-      text: "رستوران رازینه",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "بله ثبتش کن",
-      cancelButtonText: "منصرف شدم",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        e.preventDefault();
-        const bodyNewRestorants = {
-          name: values.restorantsName,
-          rating: 3,
-          distance: 2,
-          tags: tagArray,
-          menu: [
-            {
-              name: "ایرانی",
-              price: 258000,
-              ingredients: ["قیمه"],
-              available: true,
-            },
-          ],
-          city: values.cityRestorants,
-          address: values.capitalRestorants,
-          image: values.imageRestorants,
-        };
+  //   Swal.fire({
+  //     title: "آیا از ثبت این رستوران اطمینان دارید؟",
+  //     text: "رستوران رازینه",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "بله ثبتش کن",
+  //     cancelButtonText: "منصرف شدم",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       e.preventDefault();
+  //       const bodyNewRestorants = {
+  //         name: values.restorantsName,
+  //         rating: 3,
+  //         distance: 2,
+  //         tags: tagArray,
+  //         menu: [
+  //           {
+  //             name: "ایرانی",
+  //             price: 258000,
+  //             ingredients: ["قیمه"],
+  //             available: true,
+  //           },
+  //         ],
+  //         city: values.cityRestorants,
+  //         address: values.capitalRestorants,
+  //         image: values.imageRestorants,
+  //       };
 
-        fetch(`https://loving-tower-chan-kills.trycloudflare.com/restaurants`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(bodyNewRestorants),
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-          })
-          .then((data) => {
-            Swal.fire({
-              title: "رستوران با موفقیت ایجاد شد",
-              icon: "success",
-            });
-            values.restorantsName = "";
-            values.cityRestorants = "";
-            values.capitalRestorants = "";
-            values.imageRestorants = "";
-            values.tagRestorants = "";
-          });
-      }
-    });
-  };
+  //       fetch(`https://loving-tower-chan-kills.trycloudflare.com/restaurants`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(bodyNewRestorants),
+  //       })
+  //         .then((res) => {
+  //           if (!res.ok) {
+  //             throw new Error(`HTTP error! status: ${res.status}`);
+  //           }
+  //           return res.json();
+  //         })
+  //         .then((data) => {
+  //           Swal.fire({
+  //             title: "رستوران با موفقیت ایجاد شد",
+  //             icon: "success",
+  //           });
+  //           values.restorantsName = "";
+  //           values.cityRestorants = "";
+  //           values.capitalRestorants = "";
+  //           values.imageRestorants = "";
+  //           values.tagRestorants = "";
+  //         });
+  //     }
+  //   });
+  // };
 
   return (
     <div className="flex flex-col container-foods w-[100vh]">

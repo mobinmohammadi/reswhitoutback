@@ -6,8 +6,7 @@ import SeeMoreBoxes from "../../SeeMoreBoxes/SeeMoreBoxes";
 import SwalBox from "../../SwalBox/SwalBox";
 // import CkEditor from "../../CkEditor/CkEditor"
 
-export default function CommentsSections({ name , allComments }) {
-  
+export default function CommentsSections({ name, allComments }) {
   // const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const [visibleComments, setVisibleComments] = useState(3);
@@ -22,7 +21,6 @@ export default function CommentsSections({ name , allComments }) {
     boxForAddComments.current.className =
       "container-foods opacity-100 visible mt-5 transition-all";
     // boxForAddComments.current
-
   };
   const hiddenBoxesForAddComments = () => {
     boxForAddComments.current.className = "container-foods mb-3 transition-all";
@@ -30,7 +28,6 @@ export default function CommentsSections({ name , allComments }) {
       boxForAddComments.current.className = "container-foods opacity-0 hidden";
     }, 50);
     // boxForAddComments.current
-
   };
 
   // const changeValueCommentBody = (e) => {
@@ -52,7 +49,7 @@ export default function CommentsSections({ name , allComments }) {
   //     .then((res) => {
   //       if (res) {
   //         setNewTextComments("")
-          
+
   //       }
 
   //       return res;
@@ -126,13 +123,11 @@ export default function CommentsSections({ name , allComments }) {
               نظر کاربران درباره رستوران {name}
             </span>
           </div>
-          <div onClick={() => showBoxesForAddComments()} className="flex gap-1  justify-between h-full rounded-sm cursor-pointer  items-center bg-zinc-700 pr-3 pl-3 pt-2  pb-2 font-bold">
-            <span
-              
-              className="text-x sm:text-xs"
-            >
-              ثبت کامنت
-            </span>
+          <div
+            onClick={() => showBoxesForAddComments()}
+            className="flex gap-1  justify-between h-full rounded-sm cursor-pointer  items-center bg-zinc-700 pr-3 pl-3 pt-2  pb-2 font-bold"
+          >
+            <span className="text-x sm:text-xs">ثبت کامنت</span>
             <svg className="w-5 h-5">
               <use href="#chat-bubble-bottom-center-text"></use>
             </svg>
@@ -207,7 +202,7 @@ export default function CommentsSections({ name , allComments }) {
           <div className="flex mb-2 gap-2 items-center  border-1 pt-1 pb-1 pr-3 pl-3 rounded-4xl border-[#dddddd]">
             <span className="text-zinc-800 text-sm font-bold">3.8</span>
             <div className="text-slate-400 text-x">
-              <span>( 8 </span>
+              <span>( {allComments.length} </span>
               <span>نظر)</span>
             </div>
           </div>
@@ -220,39 +215,34 @@ export default function CommentsSections({ name , allComments }) {
             </div>
           </div>
         </div>
-        {productsToShow.map(comment => (
+        {productsToShow.map((comment) => (
+          <div className="rounded-md overflow-hidden m-4  shadow-[box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;  ]">
 
-          <CommentsBoxes {...comment} />
+            <CommentsBoxes {...comment} />
+          </div>
         ))}
-          {/* <CommentsBoxes name="بهنام موس زاده" body="ممنونم از کالا هاتون" />
-          <CommentsBoxes name="مبین محمدی" body="بیست🤍" />
-          <CommentsBoxes name="علی رسولی"  body="سلام"/>
-          <CommentsBoxes name="کیوان گچی"  body="خیلی خوب"/>
-          <CommentsBoxes name="مهناز طباطبایی"  body="دارای بنظیری ترین کادر"/>
-          <CommentsBoxes name="الینا حریری"  body="لاکچری💘"/>
-          <CommentsBoxes name="امیر عبوزاد"  body="ممنونم💥"/>
-          <CommentsBoxes name="فریدون جمشدیی"   body="ممنونمممممم🤞"/> */}
 
         {/* {allComments.map((comments) => (
           <CommentsBoxes {...comments} />
         ))} */}
-        <div
-          className=""
-          onClick={() =>
+        <button
+          className="flex justify-center items-center w-full"
+          onClick={() => {
             setTimeout(() => {
               addToVisibleComments();
+
               console.log(" ===> ", visibleComments);
-            }, 2000)
-          }
+            }, 2000);
+          }}
         >
           {allFoodsCommentToShown ? (
-            <span className="w-[97%] mx-auto cursor-cell pt-3 pb-3 bg-red-500 mt-3 border-b-3 rounded-md border-solid border-b-sky-800 text-white flex items-center justify-center">
+            <span className="w-[97%] mx-auto cursor-cell text-xs pt-2  pb-2  bg-red-500 mt-3 border-b-3 rounded-md border-solid border-b-sky-800 text-white flex items-center justify-center">
               اتمام کامنت های ثبت شده
             </span>
           ) : (
             <SeeMoreBoxes />
           )}
-        </div>
+        </button>
         {/* <CkEditor/> */}
         {/* {isShowModaleSucssusComments ? (
           <SwalBox ok="ok" title="کامنت با موفقیت ایجاد شد" />

@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 
-export default function BoxesFood({name ,image , id , address , city}) {
+export default function BoxesFood({allRestorants , allComments}) {
+
+  const {id ,city, name , address ,image} = allRestorants
   
   const [singleFoodsComment , setSingleFoodsComment] = useState([])
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  // const baseUrl = import.meta.env.VITE_BASE_URL;
 
   
   const modePage = useParams()
 
-  useEffect(() => {
-    fetch(`${baseUrl}/restaurants/${id}/comments`)
-    .then(res => res.json())
-    .then(result => setSingleFoodsComment(result))
+  // useEffect(() => {
+  //   fetch(`${baseUrl}/restaurants/${id}/comments`)
+  //   .then(res => res.json())
+  //   .then(result => setSingleFoodsComment(result))
     
-  } , [])
+  // } , [])
   
   return (
     <>

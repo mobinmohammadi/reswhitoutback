@@ -41,11 +41,11 @@ export default function Home() {
     wrapperAddres.current.style.transition = "all 1s ease";
   }
 
-  useEffect(() => {
-    fetch(`${baseUrl}/restaurants`)
-      .then((res) => res.json())
-      .then((result) => console.log("Data =====>", result));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${baseUrl}/restaurants`)
+  //     .then((res) => res.json())
+  //     .then((result) => console.log("Data =====>", result));
+  // }, []);
   return (
     <div className="dark:bg-zinc-600 relative">
       {/* <UserBasket/> */}

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import MenuSinglePageRestorant from "../MenuSinglePageRestorant/MenuSinglePageRestorant";
 
 export default function HeaderRestorant({ dataSingleResturants , allComments }) {
-  const {image , name , city , rating } = dataSingleResturants
+  const {image , name , city , comment , rating } = dataSingleResturants
   
 
   return (

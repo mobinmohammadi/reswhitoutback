@@ -7,11 +7,11 @@ export default function NewFoods() {
   const [allResturants , setAllResturants] = useState([])
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
-  useEffect(() => {
-    fetch(`${baseUrl}/restaurants`,)
-    .then(res => res.json())
-    .then(data => setAllResturants(data))
-  },[])
+  // useEffect(() => {
+  //   fetch(`${baseUrl}/restaurants`,)
+  //   .then(res => res.json())
+  //   .then(data => setAllResturants(data))
+  // },[])
   return (
     <div className="mt-10">
       <SectionHeader title="جدید ترین ها" />

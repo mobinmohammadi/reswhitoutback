@@ -66,7 +66,7 @@ export default function AroundMe() {
             >
               {allRestorants.map((restorant) => (
                 <SwiperSlide key={restorant.id}>
-                  <BoxesAroundMeFood {...restorant} />
+                  <BoxesAroundMeFood allRestorants={restorant} allComments={restorant.comments} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -80,7 +80,7 @@ export default function AroundMe() {
             >
               {allRestorants.map((restorant) => (
                 <SwiperSlide key={restorant.id}>
-                  <BoxesAroundMeFood {...restorant} />
+                  <BoxesAroundMeFood allRestorants={restorant} allComments={restorant.comments} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -94,7 +94,7 @@ export default function AroundMe() {
             >
               {allRestorants.map((restorant) => (
                 <SwiperSlide key={restorant.id}>
-                  <BoxesAroundMeFood {...restorant} />
+                  <BoxesAroundMeFood allRestorants={restorant} allComments={restorant.comments} />
                 </SwiperSlide>
               ))}
             </Swiper>
