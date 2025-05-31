@@ -27,7 +27,7 @@ export default function UserBasket({
   return (
     <>
       <div
-        className={`userBasket -left-[300px] ${
+        className={`userBasket -left-[300px] pb-[2rem] ${
           isShowUserBasket ? "opened-UserBasket" : ""
         } pt-3 transition-all flex flex-col justify-between pr-3 pl-3 pb-2 w-[300px] fixed top-0  z-50 h-[100vh] bg-white`}
       >
