@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Topbar from "./../../Components/Topbar/Topbar";
 import FooterPc from "./../../Components/FooterPc/FooterPc";
 import HeaderRestorant from "./../../Components/SinglePageRestorant/HeaderRestorant/HeaderRestorant";
@@ -53,7 +53,10 @@ export default function SinglePageRestorant() {
 
   // ==================    Handle User Basket ================
 
-  const [arrayUserBasket, setArrayUserBasket] = useState([]);
+  const [arrayUserBasket, setArrayUserBasket] = useState(() => {
+    const storedBasket = localStorage.getItem("basket");
+    return storedBasket ? JSON.parse(storedBasket) : [];
+  });
 
   const addToBasketUser = (foods) => {
     setArrayUserBasket((prev) => {
@@ -71,10 +74,59 @@ export default function SinglePageRestorant() {
 
   // =========================================================
 
+  // =============  Calculator User Basket  =============================
+  const [fainalyAllPriceFoods, setFainalyAllPriceFoods] = useState(0);
+
+  function CalculatorUserBasket() {
+    const allPriceFoods = arrayUserBasket?.map(
+      (item) => item.price * item.count
+    );
+    const resultAllPriceFoods = allPriceFoods?.reduce(
+      (acc, num) => acc + num,
+      0
+    );
+    setFainalyAllPriceFoods(resultAllPriceFoods);
+    console.log(allPriceFoods);
+  }
+
+  console.log(fainalyAllPriceFoods);
+
+  useEffect(() => {
+    CalculatorUserBasket();
+  }, [arrayUserBasket]);
+
+  useEffect(() => {
+    localStorage.setItem("basket", JSON.stringify(arrayUserBasket));
+  }, [arrayUserBasket]);
+
+  // ====================================================================
+
+  // ===========    Delete Foods In UserBasket  =========================
+  // const [afterDeleteFoods, setAfterDeleteFoods] = useState();
+  const deleteFoodInUserBasket = (foodID) => {
+    console.log(foodID);
+    const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
+
+    const updatedLocalStorageAfterDelete = currentBasket.filter(
+      (item) => item.id !== foodID
+    );
+    console.log(updatedLocalStorageAfterDelete);
+    // setAfterDeleteFoods(updatedLocalStorageAfterDelete);
+    localStorage.setItem("basket", JSON.stringify(updatedLocalStorageAfterDelete));
+    setArrayUserBasket(updatedLocalStorageAfterDelete)
+
+
+  };
+
+
+  // ====================================================================
+
   return (
     <div className="">
       <Topbar
+        deleteFoodInUserBasket={deleteFoodInUserBasket}
         arrayUserBasket={arrayUserBasket}
+        fainalyAllPriceFoods={fainalyAllPriceFoods}
         setArrayUserBasket={setArrayUserBasket}
       />
       <HeaderRestorant

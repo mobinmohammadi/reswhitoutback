@@ -6,7 +6,8 @@ export default function SinglePageRestorantMenu({
   handleMenuSingleRestoranst,
   dataSingleResturants,
   arrayUserBasket,
-  addToBasketUser
+  addToBasketUser,
+  
 }) {
   const [menusResturants, setMenusResturants] = useState([]);
   const dataSingleResturantsMenus = dataSingleResturants.menu;

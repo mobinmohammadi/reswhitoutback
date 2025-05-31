@@ -4,7 +4,12 @@ import EasyAddress from "../EasyAddress/EasyAddress";
 import UserBasket from "../UserBasket/UserBasket";
 import { Link } from "react-router";
 
-export default function Topbar({ arrayUserBasket, setArrayUserBasket }) {
+export default function Topbar({
+  deleteFoodInUserBasket,
+  fainalyAllPriceFoods,
+  arrayUserBasket,
+  setArrayUserBasket,
+}) {
   const [isShowModalLogin, setIsShowModalLogin] = useState(false);
   const [isShowUserBasket, setIsShowUserBasket] = useState(false);
   const [isShowLayer, setIsShowLayer] = useState(false);
@@ -147,7 +152,9 @@ export default function Topbar({ arrayUserBasket, setArrayUserBasket }) {
                 setIsShowUserBasket(true);
                 setIsShowLayer(true);
               }}
+              className="relative"
             >
+              {/* <span className="Loader-Basket absolute -right-1 shadow-2xl -top-1"></span> */}
               <span className="cursor-pointer">
                 <svg className="w-6 h-6 sm:w-8 sm:h-8">
                   <use href="#shopping-cart"></use>
@@ -198,9 +205,11 @@ export default function Topbar({ arrayUserBasket, setArrayUserBasket }) {
           </div>
         </div>
         <UserBasket
+          fainalyAllPriceFoods={fainalyAllPriceFoods}
           isShowUserBasket={isShowUserBasket}
           setArrayUserBasket={setArrayUserBasket}
           arrayUserBasket={arrayUserBasket}
+          deleteFoodInUserBasket={deleteFoodInUserBasket}
           cancelAction={closeUserBasket}
         />
         {isShowLayer && (
