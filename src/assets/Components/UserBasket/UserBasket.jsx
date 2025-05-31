@@ -27,7 +27,7 @@ export default function UserBasket({
   return (
     <>
       <div
-        className={`userBasket -left-[300px] pb-[5rem] ${
+        className={`userBasket -left-[300px] pb-[5rem] 2xs:pb-0 ${
           isShowUserBasket ? "opened-UserBasket" : ""
         } pt-3 transition-all flex flex-col justify-between pr-3 pl-3 pb-2 w-[300px] fixed top-0  z-50 h-[100vh] bg-white`}
       >
@@ -50,31 +50,34 @@ export default function UserBasket({
             {arrayUserBasket?.length ? (
               arrayUserBasket?.map((item) => (
                 <div className="mt-3 flex gap-2 border-b-1 border-[#dddddd] pb-3">
-                  <div key={item.id} className="flex gap-2">
+                  <div key={item.id} className="flex justify-between w-full gap-2">
                     <img
                       className="w-30 h-20 object-cover rounded-sm"
                       src={item.image_url}
                       alt=""
                     />
-                    <div className="flex justify-between flex-col">
-                      <span className="text-xs leading-4">{item.name}</span>
-                      <div className="text-xs flex gap-1">
-                        <span>{item.price}</span>
-                        <span>تومان</span>
+                      <div className="flex justify-around flex-col">
+                        <span className="text-xs leading-4 max-w-[5em]">{item.name}</span>
+                        <div className="text-xs flex gap-1">
+                          <span>{item.price}</span>
+                          <span>تومان</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex flex-col items-center justify-around ">
-                      <div className="flex gap-0.5">
-                        <span className="text-xs text-green-800">
-                          {item.count}
-                        </span>
-                        <span className="text-xs "> عدد</span>
-                      </div>
-                      <div onClick={() => deleteFoodInUserBasket(item.id)} className=" text-sm pt-1 rounded-sm mb-1 cursor-pointer hover:bg-red-700 transition-all pr-3 pl-3 bg-red-500 pb-1 text-white">
-                        <button className=" w-full cursor-pointer rounded-sm h-full text-white">
-                          حذف
-                        </button>
-                      </div>
+                      <div className="flex flex-col items-center justify-around ">
+                        <div className="flex gap-0.5">
+                          <span className="text-xs text-green-800">
+                            {item.count}
+                          </span>
+                          <span className="text-xs "> عدد</span>
+                        </div>
+                        <div
+                          onClick={() => deleteFoodInUserBasket(item.id)}
+                          className=" text-sm pt-1 rounded-sm mb-1 cursor-pointer hover:bg-red-700 transition-all pr-3 pl-3 bg-red-500 pb-1 text-white"
+                        >
+                          <button className=" w-full cursor-pointer rounded-sm h-full text-white">
+                            حذف
+                          </button>
+                        </div>
                     </div>
                   </div>
                 </div>
