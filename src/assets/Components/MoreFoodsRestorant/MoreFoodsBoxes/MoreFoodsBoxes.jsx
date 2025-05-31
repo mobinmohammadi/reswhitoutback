@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useCartContext } from "../../Context/Context";
 
-const  MoreFoodsBoxes = ({ menu , setArrayUserBasket , addToBasketUser }) => {
+const MoreFoodsBoxes = ({ menu, setArrayUserBasket, addToBasketUser }) => {
   const [count, setCount] = useState(0);
 
   let svgUserBasket = useRef();
@@ -22,8 +22,6 @@ const  MoreFoodsBoxes = ({ menu , setArrayUserBasket , addToBasketUser }) => {
       minusIcon.current.style.display = "none";
     }
   };
-
-  
 
   return (
     <>
@@ -81,7 +79,7 @@ const  MoreFoodsBoxes = ({ menu , setArrayUserBasket , addToBasketUser }) => {
                   <span>{count}</span>
                   <svg
                     ref={svgUserBasket}
-                    onClick={() => addToUserBasketHandler(id)}
+                    onClick={() => addToBasketUser(menu)}
                     className="  text-[#ef4123] w-6 h-6"
                   >
                     <use href="#plus-circle"></use>
@@ -96,13 +94,14 @@ const  MoreFoodsBoxes = ({ menu , setArrayUserBasket , addToBasketUser }) => {
                   ></div>
 
                   {count < 1 ? (
-                    <span
+                    <button
                       ref={btnAddToBasket}
                       type="button"
-                      className="text-xs cursor-pointer"
+                      onClick={() => addToBasketUser(menu)}
+                      className="text-x cursor-pointer"
                     >
                       افزودن به سبد خرید
-                    </span>
+                    </button>
                   ) : null}
                 </div>
               )}
@@ -154,13 +153,13 @@ const  MoreFoodsBoxes = ({ menu , setArrayUserBasket , addToBasketUser }) => {
                         ref={loaderAddTobasket}
                         className="hidden loader-addBasket"
                       ></div>
-                      <span
+                      <button
                         ref={btnAddToBasket}
                         onClick={() => addToBasketUser(menu)}
                         className=" text-x text-center leading-5 cursor-pointer "
                       >
                         افزودن به سبد خرید
-                      </span>
+                      </button>
                     </div>
                   </>
                 ) : null}
@@ -171,6 +170,6 @@ const  MoreFoodsBoxes = ({ menu , setArrayUserBasket , addToBasketUser }) => {
       </div>
     </>
   );
-}
+};
 
-export default MoreFoodsBoxes
+export default MoreFoodsBoxes;
