@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
-import Topbar from "../Topbar/Topbar";
-import FooterPc from "../FooterPc/FooterPc";
-import HeaderRestorant from "./HeaderRestorant/HeaderRestorant";
-import MoreFoodsRestorant from "../MoreFoodsRestorant/MoreFoodsRestorant";
-import MoreFoodsBoxes from "../MoreFoodsRestorant/MoreFoodsBoxes/MoreFoodsBoxes";
-import CommentsSections from "./CommentsSections/CommentsSections";
-import AddressRestorant from "./AddressRestorant/AddressRestorant";
+import Topbar from "./../../Components/Topbar/Topbar";
+import FooterPc from "./../../Components/FooterPc/FooterPc";
+import HeaderRestorant from "./../../Components/SinglePageRestorant/HeaderRestorant/HeaderRestorant";
+import MoreFoodsRestorant from "../../Components/MoreFoodsRestorant/MoreFoodsRestorant";
+import MoreFoodsBoxes from "../../Components/MoreFoodsRestorant/MoreFoodsBoxes/MoreFoodsBoxes";
+import CommentsSections from "./../../Components//SinglePageRestorant/CommentsSections/CommentsSections";
+import AddressRestorant from "./../../Components//SinglePageRestorant/AddressRestorant/AddressRestorant";
 import { useParams } from "react-router";
-import MenuSinglePageRestorant from "./MenuSinglePageRestorant/MenuSinglePageRestorant";
-import SinglePageRestorantMenu from "./SinglePageRestorantMenus/SinglePageRestorantMenus";
-import SwalBox from "../SwalBox/SwalBox";
+import MenuSinglePageRestorant from "././../../Components//SinglePageRestorant/MenuSinglePageRestorant/MenuSinglePageRestorant";
+import SinglePageRestorantMenu from "./../../Components//SinglePageRestorant/SinglePageRestorantMenus/SinglePageRestorantMenus";
 import RestorantsData from "../../../../RestorantsData.json";
+import { CartProvider } from "../../Components/Context/Context";
+import FoodBoxes from "../../Components/FoodBoxes/FoodBoxes";
 
 export default function SinglePageRestorant() {
   // const baseUrl = import.meta.env.VITE_BASE_URL;
+
   const [valueForSearch, setValueForSearch] = useState("");
   const [allRestorants, setAllRestorants] = useState(RestorantsData);
 
   const paramsID = useParams().ResoruntID;
   let [dataSingleResturants, setDataSingleResturants] = useState({});
   const [allComments, setAllComments] = useState([]);
-  const [arrayUserBasket, setArrayUserBasket] = useState([]);
   useEffect(() => {
     const foundRestorants = allRestorants.filter(
       (restoran) => restoran.id == paramsID
@@ -44,15 +45,38 @@ export default function SinglePageRestorant() {
   const [searchInMenuRestorant, setSearchInMenuRestorant] = useState([]);
 
   const handleMenuSingleRestoranst = (e) => {
-    let filredMenu =  dataSingleResturants.menu.filter((menus) =>
+    let filredMenu = dataSingleResturants.menu.filter((menus) =>
       menus.name.includes(e.target.value)
     );
-    setSearchInMenuRestorant(filredMenu)
+    setSearchInMenuRestorant(filredMenu);
   };
+
+  // ==================    Handle User Basket ================
+
+  const [arrayUserBasket, setArrayUserBasket] = useState([]);
+
+  const addToBasketUser = (foods) => {
+    setArrayUserBasket((prev) => {
+      let exist = prev.find((item) => item.id == foods.id);
+      if (exist) {
+        return prev.map((items) =>
+          items.id === foods.id ? { ...items, count: items.count + 1 } : items
+        );
+      } else {
+        return [...prev, { ...foods, count: 1 }];
+      }
+    });
+    console.log(arrayUserBasket);
+  };
+
+  // =========================================================
 
   return (
     <div className="">
-      <Topbar arrayUserBasket={arrayUserBasket} />
+      <Topbar
+        arrayUserBasket={arrayUserBasket}
+        setArrayUserBasket={setArrayUserBasket}
+      />
       <HeaderRestorant
         dataSingleResturants={dataSingleResturants}
         allComments={allComments}
@@ -86,10 +110,15 @@ export default function SinglePageRestorant() {
         </div>
       </div>
       {statusMenuShow == "resturants-comments" ? (
-        <CommentsSections dataSingleResturants={dataSingleResturants} allComments={allComments} />
+        <CommentsSections
+          dataSingleResturants={dataSingleResturants}
+          allComments={allComments}
+        />
       ) : null}
       {statusMenuShow == "resturants-menu" ? (
         <SinglePageRestorantMenu
+          addToBasketUser={addToBasketUser}
+          arrayUserBasket={arrayUserBasket}
           searchInMenuRestorant={searchInMenuRestorant}
           handleMenuSingleRestoranst={handleMenuSingleRestoranst}
           dataSingleResturants={dataSingleResturants}

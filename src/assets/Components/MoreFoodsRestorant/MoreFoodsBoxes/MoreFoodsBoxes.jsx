@@ -1,8 +1,7 @@
 import React, { useRef, useState } from "react";
-import { useCart } from "../../Context/Context";
+import { useCartContext } from "../../Context/Context";
 
-export default function MoreFoodsBoxes({ image, name, id , price , image_url }) {
-  const [useBasket, setUserBasket] = useState([]);
+const  MoreFoodsBoxes = ({ menu , setArrayUserBasket , addToBasketUser }) => {
   const [count, setCount] = useState(0);
 
   let svgUserBasket = useRef();
@@ -23,21 +22,8 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
       minusIcon.current.style.display = "none";
     }
   };
-  const arrayUserBasket = []
-  const addToBasketHandler = (id) => {
-    
-    arrayUserBasket
-    
-    loaderAddTobasket.current.className = "flex loader-addBasket";
-    btnAddToBasket.current.className = "hidden";
 
-    setTimeout(() => {
-      setCount((prev) => prev + 1);
-    }, 800);
-  };
-
-
-
+  
 
   return (
     <>
@@ -79,7 +65,7 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
           <div className="flex justify-between flex-col ">
             <img
               className="w-29 h-24 2xs:w-40 rounded-2xl "
-              src={image_url}
+              src={menu.image_url}
               alt=""
             />
             <div className="flex  2xs:hidden justify-center gap-1 items-center pt-2 ">
@@ -113,7 +99,6 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
                     <span
                       ref={btnAddToBasket}
                       type="button"
-                      onClick={() => addToBasketHandler()}
                       className="text-xs cursor-pointer"
                     >
                       افزودن به سبد خرید
@@ -125,7 +110,9 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
           </div>
           <div className="flex 2xs:pl-5 2xs:pr-2 justify-between h-[8rem] 2xs:h-[6rem] flex-col gap-2   2xs:items-start">
             <div className="flex gap-1 flex-col">
-              <span className="text-sm  2xs:text-md font-bold">{name}</span>
+              <span className="text-sm  2xs:text-md font-bold">
+                {menu.name}
+              </span>
               <span className="text-xs flex items-center justify-center w-[130px] 2xs:w-full text-[#888993]">
                 سینه مرغ گریل شده، قارچ، ذرت، فلفل دلمه
               </span>
@@ -137,7 +124,7 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
             <div className="flex gap-2 2xs:gap-5 flex-col 2xs:flex-row items-center">
               <div className="text-[#ef4123] text-xs flex gap-[2px] ">
                 <span>قیمت از</span>
-                <span>{price}</span>
+                <span>{menu.price}</span>
                 <span>تومان</span>
               </div>
               <div className="hidden 2xs:flex cursor-pointer  gap-1  items-center">
@@ -153,7 +140,7 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
                     <span>{count}</span>
                     <svg
                       ref={svgUserBasket}
-                      onClick={() => addToUserBasketHandler(id)}
+                      onClick={() => addToUserBasketHandler(menu.id)}
                       className="  text-[#ef4123] w-6 h-6"
                     >
                       <use href="#plus-circle"></use>
@@ -169,7 +156,7 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
                       ></div>
                       <span
                         ref={btnAddToBasket}
-                        onClick={() => addToBasketHandler(id)}
+                        onClick={() => addToBasketUser(menu)}
                         className=" text-x text-center leading-5 cursor-pointer "
                       >
                         افزودن به سبد خرید
@@ -185,3 +172,5 @@ export default function MoreFoodsBoxes({ image, name, id , price , image_url }) 
     </>
   );
 }
+
+export default MoreFoodsBoxes

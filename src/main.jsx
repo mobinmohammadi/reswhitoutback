@@ -5,13 +5,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { StrictMode } from "react";
 import Home from "./assets/Page/Home/Home.jsx";
 import CateguryFoods from "./assets/Components/CateguryFoods/CateguryFoods.jsx";
-import SinglePageRestorant from "./assets/Components/SinglePageRestorant/SinglePageRestorant.jsx";
-import { Pane } from "react-leaflet";
-import PanelSellerResturants from "./assets/Page/Home/PanelSellerResturants/PanelSellerResturants.jsx";
+import SinglePageRestorant from "./assets/Page/SinglePageRestorant/SinglePageRestorant.jsx";  
 import NewRestourants from "./assets/Components/PanelSaller/HomeSellerPanel/NewRestourants/NewRestourants.jsx";
 import HomePanel from "./assets/Components/PanelSaller/HomeSellerPanel/HomePanel/HomePanel.jsx";
-import SignUp from "./assets/Page/Home/SignUp/SignUp.jsx";
+import SignUp from "./assets/Page/SignUp/SignUp.jsx";
 import Login from "./assets/Components/RegistrationAndAuthentication/Login/Login.jsx";
+import PanelSellerResturants from "./assets/Page/PanelSellerResturants/PanelSellerResturants.jsx";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>

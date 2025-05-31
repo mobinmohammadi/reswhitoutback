@@ -14,7 +14,7 @@ function App() {
   return (
       <div>
         {/* <UserBasket/> */}
-        <CateguryFoods />
+        {/* <CateguryFoods /> */}
       </div>
   );
 }

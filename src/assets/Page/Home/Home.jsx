@@ -56,7 +56,7 @@ export default function Home() {
       <Header city={city} />
       <div className="container-custom">
         <PapularCategury />
-        <AroundMe  />
+        <AroundMe arrayUserBasket={arrayUserBasket} setArrayUserBasket={setArrayUserBasket}  />
         <NewFoods />
       </div>
       <FooterPc />

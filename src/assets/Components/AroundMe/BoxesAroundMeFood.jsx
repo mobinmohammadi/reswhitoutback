@@ -12,7 +12,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import BoxesAroundMeFood from "../BoxesAroundMeFood/BoxesAroundMeFood";
-export default function AroundMe() {
+export default function AroundMe({arrayUserBasket , setArrayUserBasket}) {
   const [allRestorants, setAllRestorants] = useState(RestorantsData);
   
   

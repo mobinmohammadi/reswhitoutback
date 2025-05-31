@@ -1,26 +1,43 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
-// ایجاد context
 const CartContext = createContext();
 
-// کامپوننت provider
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [items, setItems] = useState([]);
 
   const addToCart = (item) => {
-    setCart((prev) => [...prev, item]);
+    setItems((prevItems) => {
+      const existing = prevItems.find((i) => i.id === item.id);
+      if (existing) {
+        return prevItems.map((i) =>
+          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
+      }
+      return [...prevItems, { ...item, quantity: 1 }];
+    });
   };
+  
 
   const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const clearCart = () => {
+    setItems([]);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ items, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// هوک شخصی برای استفاده راحت‌تر از context
-export const useCart = () => useContext(CartContext);
+export const useCartContext = () => {
+  const context = useContext(CartContext);
+
+  if (!context) {
+    throw new Error("useCartContext باید در داخل CartProvider استفاده شود");
+  }
+  return context;
+};
