@@ -6,6 +6,7 @@ export default function SinglePageRestorantMenu({
   handleMenuSingleRestoranst,
   dataSingleResturants,
   arrayUserBasket,
+  setArrayUserBasket,
   addToBasketUser,
   
 }) {
@@ -37,12 +38,12 @@ export default function SinglePageRestorantMenu({
           {searchInMenuRestorant.length
             ? searchInMenuRestorant.map((menu, index) => (
                 <div key={index + 1} className="">
-                  <MoreFoodsBoxes arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} menu={menu} />
+                  <MoreFoodsBoxes arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket} menu={menu} />
                 </div>
               ))
             : dataSingleResturantsMenus?.map((menu, index) => (
                 <div key={index + 1} className="">
-                  <MoreFoodsBoxes arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser}  menu={menu} />
+                  <MoreFoodsBoxes arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket}  menu={menu} />
                 </div>
               ))}
         </div>

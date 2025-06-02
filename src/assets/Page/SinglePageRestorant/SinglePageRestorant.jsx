@@ -71,9 +71,11 @@ export default function SinglePageRestorant() {
     });
   };
 
-  // =========================================================
+  // ===================================================================
 
   // =============  Calculator User Basket  =============================
+
+
   const [fainalyAllPriceFoods, setFainalyAllPriceFoods] = useState(0);
 
   function CalculatorUserBasket() {
@@ -169,6 +171,7 @@ export default function SinglePageRestorant() {
           searchInMenuRestorant={searchInMenuRestorant}
           handleMenuSingleRestoranst={handleMenuSingleRestoranst}
           dataSingleResturants={dataSingleResturants}
+          setArrayUserBasket={setArrayUserBasket}
           // arrayUserBasket={arrayUserBasket}
           // setArrayUserBasket={setArrayUserBasket}
           // dataSingleResturants={dataSingleResturants}
