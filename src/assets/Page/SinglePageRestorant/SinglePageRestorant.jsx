@@ -75,7 +75,6 @@ export default function SinglePageRestorant() {
 
   // =============  Calculator User Basket  =============================
 
-
   const [fainalyAllPriceFoods, setFainalyAllPriceFoods] = useState(0);
 
   function CalculatorUserBasket() {
@@ -88,7 +87,6 @@ export default function SinglePageRestorant() {
     );
     setFainalyAllPriceFoods(resultAllPriceFoods);
   }
-
 
   useEffect(() => {
     CalculatorUserBasket();
@@ -109,18 +107,21 @@ export default function SinglePageRestorant() {
       (item) => item.id !== foodID
     );
     // setAfterDeleteFoods(updatedLocalStorageAfterDelete);
-    localStorage.setItem("basket", JSON.stringify(updatedLocalStorageAfterDelete));
-    setArrayUserBasket(updatedLocalStorageAfterDelete)
-
-
+    localStorage.setItem(
+      "basket",
+      JSON.stringify(updatedLocalStorageAfterDelete)
+    );
+    setArrayUserBasket(updatedLocalStorageAfterDelete);
   };
-
-
   // ====================================================================
+
+  const [idProductInBasket, setIdProductInBasket] = useState();
+  console.log(idProductInBasket);
 
   return (
     <div className="">
       <Topbar
+        setIdProductInBasket={setIdProductInBasket}
         deleteFoodInUserBasket={deleteFoodInUserBasket}
         arrayUserBasket={arrayUserBasket}
         fainalyAllPriceFoods={fainalyAllPriceFoods}
@@ -166,15 +167,13 @@ export default function SinglePageRestorant() {
       ) : null}
       {statusMenuShow == "resturants-menu" ? (
         <SinglePageRestorantMenu
+          idProductInBasket={idProductInBasket}
           addToBasketUser={addToBasketUser}
           arrayUserBasket={arrayUserBasket}
           searchInMenuRestorant={searchInMenuRestorant}
           handleMenuSingleRestoranst={handleMenuSingleRestoranst}
           dataSingleResturants={dataSingleResturants}
           setArrayUserBasket={setArrayUserBasket}
-          // arrayUserBasket={arrayUserBasket}
-          // setArrayUserBasket={setArrayUserBasket}
-          // dataSingleResturants={dataSingleResturants}
         />
       ) : null}
       {statusMenuShow == "resturants-infos" ? (

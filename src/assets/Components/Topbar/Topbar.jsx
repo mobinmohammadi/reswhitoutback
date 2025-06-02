@@ -9,6 +9,7 @@ export default function Topbar({
   fainalyAllPriceFoods,
   arrayUserBasket,
   setArrayUserBasket,
+  setIdProductInBasket,
 }) {
   const [isShowModalLogin, setIsShowModalLogin] = useState(false);
   const [isShowUserBasket, setIsShowUserBasket] = useState(false);
@@ -204,7 +205,9 @@ export default function Topbar({
             </div>
           </div>
         </div>
+
         <UserBasket
+          setIdProductInBasket={setIdProductInBasket}
           fainalyAllPriceFoods={fainalyAllPriceFoods}
           isShowUserBasket={isShowUserBasket}
           setArrayUserBasket={setArrayUserBasket}

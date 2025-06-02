@@ -7,6 +7,7 @@ export default function UserBasket({
   cancelAction,
   arrayUserBasket,
   setArrayUserBasket,
+  setIdProductInBasket
 }) {
   const wrapperUserBasket = useRef(null);
 
@@ -101,6 +102,7 @@ export default function UserBasket({
                         </div>
                         <button
                           ref={btnDeleteFood}
+                          onClick={() => setIdProductInBasket(item.id)}
                           className=" w-full flex cursor-pointer rounded-sm h-full text-white"
                         >
                           حذف

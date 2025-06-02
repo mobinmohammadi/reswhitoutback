@@ -8,6 +8,7 @@ export default function SinglePageRestorantMenu({
   arrayUserBasket,
   setArrayUserBasket,
   addToBasketUser,
+  idProductInBasket
   
 }) {
   const [menusResturants, setMenusResturants] = useState([]);
@@ -38,12 +39,12 @@ export default function SinglePageRestorantMenu({
           {searchInMenuRestorant.length
             ? searchInMenuRestorant.map((menu, index) => (
                 <div key={index + 1} className="">
-                  <MoreFoodsBoxes arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket} menu={menu} />
+                  <MoreFoodsBoxes idProductInBasket={idProductInBasket} arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket} menu={menu} />
                 </div>
               ))
             : dataSingleResturantsMenus?.map((menu, index) => (
                 <div key={index + 1} className="">
-                  <MoreFoodsBoxes arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket}  menu={menu} />
+                  <MoreFoodsBoxes idProductInBasket={idProductInBasket} arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket}  menu={menu} />
                 </div>
               ))}
         </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useCartContext } from "../../Context/Context";
 
 // تعریف کامپوننت MoreFoodsBoxes
-const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
+const MoreFoodsBoxes = ({ menu, addToBasketUser, idProductInBasket }) => {
   // تعداد فعلی محصول در سبد خرید (صرفاً برای نمایش داخلی، البته خیلی استفاده نشده)
   const [count, setCount] = useState(0);
 
@@ -31,14 +31,18 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
   // اضافه کردن محصول به سبد خرید و فعال کردن لودر به مدت ۱ ثانیه
   const handleAddToBasketAndStyle = (menuItem) => {
     const updatedBasket = [...arrayUserBasket];
-    const existingItem = updatedBasket.find(item => item.id === menuItem.id);
+    const existingItem = updatedBasket.find((item) => item.id === menuItem.id);
 
-    if (existingItem) {
-      existingItem.count++; // اگر قبلاً بود، فقط تعداد رو زیاد کن
-    } else {
-      updatedBasket.push({ ...menuItem, count: 1 }); // اگر نبود، اضافه کن با تعداد ۱
-      addToBasketUser(menuItem)
-    }
+    setTimeout(() => {
+      
+      if (existingItem) {
+        
+        existingItem.count++; // اگر قبلاً بود، فقط تعداد رو زیاد کن
+      } else {
+        updatedBasket.push({ ...menuItem, count: 1 }); // اگر نبود، اضافه کن با تعداد ۱
+        addToBasketUser(menuItem);
+      }
+    }, 1100);
 
     updateLocalStorage(updatedBasket); // ذخیره در لوکال استوریج و state
     setIsStyleLoader(true); // نمایش لودر
@@ -48,11 +52,11 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
   // افزایش تعداد یک محصول خاص در سبد خرید
   const increaseCount = (product) => {
     const updatedBasket = [...arrayUserBasket];
-    const item = updatedBasket.find(i => i.id === product.id);
+    const item = updatedBasket.find((i) => i.id === product.id);
     if (item) {
       item.count++;
       updateLocalStorage(updatedBasket);
-      addToBasketUser(product)
+      addToBasketUser(product);
     } else {
       alert("این کالا در سبد خرید وجود ندارد 🙄");
     }
@@ -61,14 +65,19 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
   // کاهش تعداد یک محصول خاص در سبد خرید (یا حذف کامل اگه تعداد بشه ۰)
   const decreaseCount = (product) => {
     const updatedBasket = [...arrayUserBasket];
-    const index = updatedBasket.findIndex(i => i.id === product.id);
+    const index = updatedBasket.findIndex((i) => i.id === product.id);
 
     if (index !== -1) {
       if (updatedBasket[index].count > 1) {
         updatedBasket[index].count--; // کاهش یک عدد
       } else {
-        updatedBasket.splice(index, 1); // حذف کامل محصول از سبد
-        
+        const confirmDelete = window.confirm(
+          "آیا مطمئنی که می‌خوای این آیتم رو حذف کنی؟"
+        );
+        if (confirmDelete) {
+          updatedBasket.splice(index, 1); // حذف کامل محصول از سبد
+          window.location.reload()
+        }
       }
       updateLocalStorage(updatedBasket);
     } else {
@@ -77,13 +86,21 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
   };
 
   // پیدا کردن محصول فعلی در سبد خرید برای نمایش تعداد فعلی
-  const currentProduct = arrayUserBasket.find(p => p.id === menu.id);
+  const currentProduct = arrayUserBasket.find((p) => p.id === menu.id);
   const currentCount = currentProduct ? currentProduct.count : 0;
 
   // خروجی رندر کامپوننت
+
+  //  ================== Clear Count ===========================
+
+  const getProductCount = (id) => {
+    const item = arrayUserBasket.find((p) => p.id == id);
+    return item ? item.count : 0;
+  };
+
+  // ============================================================
   return (
     <div className="flex justify-around 2xs:flex-row text-center 2xs:text-right items-center gap-2 bg-white pt-3 pl-5 2xs:pl-0 pb-3 pr-3 rounded-2xl">
-      
       {/* بخش تصویر و دکمه افزودن */}
       <div className="flex justify-between flex-col">
         <img
@@ -104,7 +121,7 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
               >
                 <use href="#minus-circle" />
               </svg>
-              <span>{currentCount}</span>
+              <span>{getProductCount(menu.id)}</span>
               <svg
                 ref={svgUserBasket}
                 onClick={() => increaseCount(menu)}
@@ -118,7 +135,9 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
             <div className="hover:bg-[#ef5c4d] w-28 flex justify-center hover:text-white text-[#ef5c4d] border border-[#ef5c4d] rounded-xl pt-1 pb-1 px-2">
               <div
                 ref={loaderAddTobasket}
-                className={`${isStyleLoader ? "block" : "hidden"} loader-addBasket`}
+                className={`${
+                  isStyleLoader ? "block" : "hidden"
+                } loader-addBasket`}
               ></div>
               {!isStyleLoader && (
                 <button
@@ -138,7 +157,9 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
       {/* بخش اطلاعات محصول: عنوان، توضیح، قیمت */}
       <div className="flex 2xs:pl-5 2xs:pr-2 justify-between h-[8rem] 2xs:h-[6rem] flex-col gap-2 2xs:items-start">
         <div className="flex gap-1 flex-col">
-          <span className="text-sm 2xs:text-md text-right font-bold">{menu.name}</span>
+          <span className="text-sm 2xs:text-md text-right font-bold">
+            {menu.name}
+          </span>
           <span className="text-xs text-right w-[130px] 2xs:w-full text-[#888993]">
             سینه مرغ گریل شده، قارچ، ذرت، فلفل دلمه
           </span>
