@@ -37,6 +37,7 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
       existingItem.count++; // اگر قبلاً بود، فقط تعداد رو زیاد کن
     } else {
       updatedBasket.push({ ...menuItem, count: 1 }); // اگر نبود، اضافه کن با تعداد ۱
+      addToBasketUser(menuItem)
     }
 
     updateLocalStorage(updatedBasket); // ذخیره در لوکال استوریج و state
@@ -51,6 +52,7 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
     if (item) {
       item.count++;
       updateLocalStorage(updatedBasket);
+      addToBasketUser(product)
     } else {
       alert("این کالا در سبد خرید وجود ندارد 🙄");
     }
@@ -66,6 +68,7 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser }) => {
         updatedBasket[index].count--; // کاهش یک عدد
       } else {
         updatedBasket.splice(index, 1); // حذف کامل محصول از سبد
+        
       }
       updateLocalStorage(updatedBasket);
     } else {
