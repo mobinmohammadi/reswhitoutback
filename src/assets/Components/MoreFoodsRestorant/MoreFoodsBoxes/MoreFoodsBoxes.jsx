@@ -3,7 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useCartContext } from "../../Context/Context";
 
 // تعریف کامپوننت MoreFoodsBoxes
-const MoreFoodsBoxes = ({ menu, addToBasketUser, idProductInBasket }) => {
+const MoreFoodsBoxes = ({
+  menu,
+  addToBasketUser,
+  idProductInBasket,
+  dataSingleResturantsMenus,
+}) => {
   // تعداد فعلی محصول در سبد خرید (صرفاً برای نمایش داخلی، البته خیلی استفاده نشده)
   const [count, setCount] = useState(0);
 
@@ -34,9 +39,7 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser, idProductInBasket }) => {
     const existingItem = updatedBasket.find((item) => item.id === menuItem.id);
 
     setTimeout(() => {
-      
       if (existingItem) {
-        
         existingItem.count++; // اگر قبلاً بود، فقط تعداد رو زیاد کن
       } else {
         updatedBasket.push({ ...menuItem, count: 1 }); // اگر نبود، اضافه کن با تعداد ۱
@@ -61,6 +64,13 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser, idProductInBasket }) => {
       alert("این کالا در سبد خرید وجود ندارد 🙄");
     }
   };
+  //================================================
+
+
+    
+
+
+
 
   // کاهش تعداد یک محصول خاص در سبد خرید (یا حذف کامل اگه تعداد بشه ۰)
   const decreaseCount = (product) => {
@@ -76,7 +86,8 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser, idProductInBasket }) => {
         );
         if (confirmDelete) {
           updatedBasket.splice(index, 1); // حذف کامل محصول از سبد
-          window.location.reload()
+          window.location.reload();
+          addToBasketUser(product);
         }
       }
       updateLocalStorage(updatedBasket);
@@ -86,7 +97,7 @@ const MoreFoodsBoxes = ({ menu, addToBasketUser, idProductInBasket }) => {
   };
 
   // پیدا کردن محصول فعلی در سبد خرید برای نمایش تعداد فعلی
-  const currentProduct = arrayUserBasket.find((p) => p.id === menu.id);
+  const currentProduct = arrayUserBasket.find((p) => p.id === menu.id) || 0;
   const currentCount = currentProduct ? currentProduct.count : 0;
 
   // خروجی رندر کامپوننت

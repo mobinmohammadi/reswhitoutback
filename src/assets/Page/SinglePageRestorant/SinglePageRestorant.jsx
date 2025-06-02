@@ -114,6 +114,13 @@ export default function SinglePageRestorant() {
     setArrayUserBasket(updatedLocalStorageAfterDelete);
   };
   // ====================================================================
+  // ====================================================================
+
+    
+
+
+
+  // ====================================================================
 
   const [idProductInBasket, setIdProductInBasket] = useState();
   console.log(idProductInBasket);

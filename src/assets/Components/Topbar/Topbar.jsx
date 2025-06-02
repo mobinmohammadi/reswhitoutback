@@ -155,8 +155,13 @@ export default function Topbar({
               }}
               className="relative"
             >
+              
+              
+             <div className="absolute text-xs -right-2 -top-2 flex items-center justify-center text-white  bg-red-500 w-5 h-5 rounded-2xl">
+              <span className="mt-1">{arrayUserBasket.length || 0}</span> 
+             </div>
               {/* <span className="Loader-Basket absolute -right-1 shadow-2xl -top-1"></span> */}
-              <span className="cursor-pointer">
+              <span  className="cursor-pointer">
                 <svg className="w-6 h-6 sm:w-8 sm:h-8">
                   <use href="#shopping-cart"></use>
                 </svg>

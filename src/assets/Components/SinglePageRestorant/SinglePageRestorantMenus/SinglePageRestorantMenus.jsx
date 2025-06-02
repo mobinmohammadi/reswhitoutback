@@ -44,7 +44,7 @@ export default function SinglePageRestorantMenu({
               ))
             : dataSingleResturantsMenus?.map((menu, index) => (
                 <div key={index + 1} className="">
-                  <MoreFoodsBoxes idProductInBasket={idProductInBasket} arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket}  menu={menu} />
+                  <MoreFoodsBoxes dataSingleResturantsMenus={dataSingleResturantsMenus} idProductInBasket={idProductInBasket} arrayUserBasket={arrayUserBasket} addToBasketUser={addToBasketUser} setArrayUserBasket={setArrayUserBasket}  menu={menu} />
                 </div>
               ))}
         </div>
