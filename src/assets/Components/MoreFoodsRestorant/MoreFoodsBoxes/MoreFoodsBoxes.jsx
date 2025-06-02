@@ -1,25 +1,50 @@
 import React, { useRef, useState } from "react";
 import { useCartContext } from "../../Context/Context";
 
-const MoreFoodsBoxes = ({ menu, setArrayUserBasket, addToBasketUser }) => {
+const MoreFoodsBoxes = ({
+  arrayUserBasket,
+  menu,
+  setArrayUserBasket,
+  addToBasketUser,
+}) => {
   const [count, setCount] = useState(0);
+  const [allCountProducts, setAllCountProducts] = useState({});
+  const [resultAllCount, setResultAllCount] = useState();
 
   let svgUserBasket = useRef();
   let loaderAddTobasket = useRef();
   let minusIcon = useRef();
   const btnAddToBasket = useRef();
-  const addToUserBasketHandler = (productID) => {
-    setCount(count + 1);
-    svgUserBasket.current = "";
-    if (count >= 1) {
-      minusIcon.current.style.display = "block";
+
+  const handelAddToBasketAndStyle = (menu) => {
+    addToBasketUser(menu);
+    setResultAllCount((prev) => prev + 1);
+  };
+
+  const increaseInNumberProducts = (products) => {
+    const findProductInUserBasketForIncrease = arrayUserBasket.find(
+      (product) => product.id == products.id
+    );
+    if (!findProductInUserBasketForIncrease) {
+      alert("این کالا در سیبد خرید وجود ندارد 🙄");
     } else {
+      const countAfterIncreaseProduct =
+        findProductInUserBasketForIncrease.count++;
+      setResultAllCount(countAfterIncreaseProduct);
     }
   };
-  const minusToUserBasket = () => {
-    setCount(count - 1);
-    if (count <= 1) {
-      minusIcon.current.style.display = "none";
+
+  const reduceTheNumber = (products) => {
+    const findProductInUserBasketForIncrease = arrayUserBasket.find(
+      (product) => product.id == products.id
+    );
+
+    if (!findProductInUserBasketForIncrease) {
+      alert("این کالا در سیبد خرید وجود ندارد 🙄");
+    } else {
+      const countAfterIncreaseProduct =
+        findProductInUserBasketForIncrease.count--;
+      setResultAllCount(countAfterIncreaseProduct);
     }
   };
 
@@ -67,44 +92,44 @@ const MoreFoodsBoxes = ({ menu, setArrayUserBasket, addToBasketUser }) => {
               alt=""
             />
             <div className="flex  2xs:hidden justify-center gap-1 items-center pt-2 ">
-              {count >= 1 ? (
-                <>
+              {resultAllCount < 1 ? null : (
+                <div className="flex items-center gap-1">
                   <svg
-                    onClick={() => minusToUserBasket()}
+                    onClick={() => reduceTheNumber(menu)}
                     ref={minusIcon}
-                    className="hidden text-[#ef4123] w-6 h-6"
+                    className={`${
+                      resultAllCount > 1 ? "block" : "hidden"
+                    } text-[#ef4123] w-6 h-6`}
                   >
                     <use href="#minus-circle"></use>
                   </svg>
-                  <span>{count}</span>
+                  <span>{resultAllCount}</span>
                   <svg
                     ref={svgUserBasket}
-                    onClick={() => addToBasketUser(menu)}
+                    onClick={() => increaseInNumberProducts(menu)}
                     className="  text-[#ef4123] w-6 h-6"
                   >
                     <use href="#plus-circle"></use>
                   </svg>
-                </>
-              ) : null}
-              {count >= 1 ? null : (
-                <div className="hover:bg-[#ef5c4d] w-28 flex justify-center hover:text-white hover:transition-colors text-[#ef5c4d] border-1 border-[#ef5c4d] rounded-xl pt-1 pb-1 pr-2 pl-2">
-                  <div
-                    ref={loaderAddTobasket}
-                    className="hidden loader-addBasket"
-                  ></div>
-
-                  {count < 1 ? (
-                    <button
-                      ref={btnAddToBasket}
-                      type="button"
-                      onClick={() => addToBasketUser(menu)}
-                      className="text-x cursor-pointer"
-                    >
-                      افزودن به سبد خرید
-                    </button>
-                  ) : null}
                 </div>
               )}
+              <div className="hover:bg-[#ef5c4d] w-28 flex justify-center hover:text-white hover:transition-colors text-[#ef5c4d] border-1 border-[#ef5c4d] rounded-xl pt-1 pb-1 pr-2 pl-2">
+                <div
+                  ref={loaderAddTobasket}
+                  className="hidden loader-addBasket"
+                ></div>
+
+                <button
+                  ref={btnAddToBasket}
+                  type="button"
+                  onClick={() => {
+                    handelAddToBasketAndStyle(menu);
+                  }}
+                  className="text-x cursor-pointer"
+                >
+                  افزودن به سبد خرید
+                </button>
+              </div>
             </div>
           </div>
           <div className="flex 2xs:pl-5 2xs:pr-2 justify-between h-[8rem] 2xs:h-[6rem] flex-col gap-2   2xs:items-start">

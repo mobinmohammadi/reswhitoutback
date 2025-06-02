@@ -69,7 +69,6 @@ export default function SinglePageRestorant() {
         return [...prev, { ...foods, count: 1 }];
       }
     });
-    console.log(arrayUserBasket);
   };
 
   // =========================================================
@@ -86,10 +85,8 @@ export default function SinglePageRestorant() {
       0
     );
     setFainalyAllPriceFoods(resultAllPriceFoods);
-    console.log(allPriceFoods);
   }
 
-  console.log(fainalyAllPriceFoods);
 
   useEffect(() => {
     CalculatorUserBasket();
@@ -104,13 +101,11 @@ export default function SinglePageRestorant() {
   // ===========    Delete Foods In UserBasket  =========================
   // const [afterDeleteFoods, setAfterDeleteFoods] = useState();
   const deleteFoodInUserBasket = (foodID) => {
-    console.log(foodID);
     const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
 
     const updatedLocalStorageAfterDelete = currentBasket.filter(
       (item) => item.id !== foodID
     );
-    console.log(updatedLocalStorageAfterDelete);
     // setAfterDeleteFoods(updatedLocalStorageAfterDelete);
     localStorage.setItem("basket", JSON.stringify(updatedLocalStorageAfterDelete));
     setArrayUserBasket(updatedLocalStorageAfterDelete)

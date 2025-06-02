@@ -23,6 +23,19 @@ export default function UserBasket({
     styleWrapperUserBasket();
   }, [arrayUserBasket]);
   // ====================================================================
+  const wrapperDeleteBtn = useRef();
+  const wrapperFoods = useRef()
+  const btnDeleteFood = useRef();
+  const LoaderDeleteFood = useRef();
+
+  function styleAndDeletOnFoods(e ,itemID) {
+    console.log(e.parentElement);
+    
+    setTimeout(() => {
+
+      deleteFoodInUserBasket(itemID);
+    }, 1000);
+  }
 
   return (
     <>
@@ -49,35 +62,50 @@ export default function UserBasket({
             ) : null}
             {arrayUserBasket?.length ? (
               arrayUserBasket?.map((item) => (
-                <div className="mt-3 flex gap-2 border-b-1 border-[#dddddd] pb-3">
-                  <div key={item.id} className="flex justify-between w-full gap-2">
+                <div ref={wrapperFoods} className="mt-3 flex gap-2 border-b-1 border-[#dddddd] pb-3">
+                  <div
+                    key={item.id}
+                    className="flex justify-between w-full gap-2"
+                  >
                     <img
                       className="w-30 h-20 object-cover rounded-sm"
                       src={item.image_url}
                       alt=""
                     />
-                      <div className="flex justify-around flex-col">
-                        <span className="text-xs leading-4 max-w-[5em]">{item.name}</span>
-                        <div className="text-xs flex gap-1">
-                          <span>{item.price}</span>
-                          <span>تومان</span>
-                        </div>
+                    <div className="flex justify-around flex-col">
+                      <span className="text-xs leading-4 max-w-[5em] max-h-[1em]">
+                        {item.name}
+                      </span>
+                      <div className="text-xs flex gap-1">
+                        <span>{item.price}</span>
+                        <span>تومان</span>
                       </div>
-                      <div className="flex flex-col items-center justify-around ">
-                        <div className="flex gap-0.5">
-                          <span className="text-xs text-green-800">
-                            {item.count}
-                          </span>
-                          <span className="text-xs "> عدد</span>
-                        </div>
+                    </div>
+                    <div className="flex flex-col items-center justify-around ">
+                      <div className="flex gap-0.5">
+                        <span className="text-xs text-green-800">
+                          {item.count}
+                        </span>
+                        <span className="text-xs "> عدد</span>
+                      </div>
+                      <div
+                        ref={wrapperDeleteBtn}
+                        onClick={(e) => styleAndDeletOnFoods(e,item.id)}
+                        className=" text-sm pt-1 flex items-center justify-center rounded-sm mb-1 cursor-pointer hover:bg-red-700 transition-all pr-3 pl-3 bg-red-500 pb-1 text-white"
+                      >
                         <div
-                          onClick={() => deleteFoodInUserBasket(item.id)}
-                          className=" text-sm pt-1 rounded-sm mb-1 cursor-pointer hover:bg-red-700 transition-all pr-3 pl-3 bg-red-500 pb-1 text-white"
+                          ref={LoaderDeleteFood}
+                          className="hidden items-center justify-center"
                         >
-                          <button className=" w-full cursor-pointer rounded-sm h-full text-white">
-                            حذف
-                          </button>
+                          <span className="Loader-Basket"></span>
                         </div>
+                        <button
+                          ref={btnDeleteFood}
+                          className=" w-full flex cursor-pointer rounded-sm h-full text-white"
+                        >
+                          حذف
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
