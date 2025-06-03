@@ -8,6 +8,7 @@ const MoreFoodsBoxes = ({
   addToBasketUser,
   idProductInBasket,
   dataSingleResturantsMenus,
+
 }) => {
   // تعداد فعلی محصول در سبد خرید (صرفاً برای نمایش داخلی، البته خیلی استفاده نشده)
   const [count, setCount] = useState(0);
@@ -66,12 +67,6 @@ const MoreFoodsBoxes = ({
   };
   //================================================
 
-
-    
-
-
-
-
   // کاهش تعداد یک محصول خاص در سبد خرید (یا حذف کامل اگه تعداد بشه ۰)
   const decreaseCount = (product) => {
     const updatedBasket = [...arrayUserBasket];
@@ -113,36 +108,22 @@ const MoreFoodsBoxes = ({
   return (
     <div className="flex justify-around 2xs:flex-row text-center 2xs:text-right items-center gap-2 bg-white pt-3 pl-5 2xs:pl-0 pb-3 pr-3 rounded-2xl">
       {/* بخش تصویر و دکمه افزودن */}
-      <div className="flex justify-between flex-col">
+      <div className="flex justify-center sm:h-[150px] flex-col items-center">
         <img
-          className="w-29 h-24 2xs:w-40 rounded-2xl"
+          className="w-32 text-center items-center sm:w-[120px] sm:h-[120px] sm:object-cover  h-24 2xs:w-40 rounded-2xl"
           src={menu.image_url}
-          alt=""
+          alt="بدون عکس ..."
         />
 
         {/* دکمه‌های موبایل (فقط در موبایل یا نمایش کوچیک دیده میشه) */}
-        <div className="flex 2xs:hidden justify-center gap-1 items-center pt-2">
+        <div className="flex sm:hidden justify-center gap-1 items-center pt-2">
           {currentCount > 0 ? (
-            // اگر محصول در سبد بود، دکمه‌های + و - رو نشون بده
-            <div className="flex items-center gap-1">
-              <svg
-                onClick={() => decreaseCount(menu)}
-                ref={minusIcon}
-                className="cursor-pointer text-[#ef4123] w-6 h-6"
-              >
-                <use href="#minus-circle" />
-              </svg>
-              <span>{getProductCount(menu.id)}</span>
-              <svg
-                ref={svgUserBasket}
-                onClick={() => increaseCount(menu)}
-                className="cursor-pointer text-[#ef4123] w-6 h-6"
-              >
-                <use href="#plus-circle" />
-              </svg>
+            <div className="bg-green-600 max-w-[125px] rounded-sm text-white pr-2 pl-2">
+              <span className="text-xs  overflow-hidden">
+                به سبد خرید اضافه شد{" "}
+              </span>
             </div>
           ) : (
-            // اگر محصول در سبد نبود، دکمه افزودن نشون داده میشه
             <div className="hover:bg-[#ef5c4d] w-28 flex justify-center hover:text-white text-[#ef5c4d] border border-[#ef5c4d] rounded-xl pt-1 pb-1 px-2">
               <div
                 ref={loaderAddTobasket}
@@ -165,8 +146,7 @@ const MoreFoodsBoxes = ({
         </div>
       </div>
 
-      {/* بخش اطلاعات محصول: عنوان، توضیح، قیمت */}
-      <div className="flex 2xs:pl-5 2xs:pr-2 justify-between h-[8rem] 2xs:h-[6rem] flex-col gap-2 2xs:items-start">
+      <div className="flex 2xs:pl-5 2xs:pr-2 sm:justify-start  2xs:h-[6rem] flex-col gap-2 2xs:items-start">
         <div className="flex gap-1 flex-col">
           <span className="text-sm 2xs:text-md text-right font-bold">
             {menu.name}
@@ -175,10 +155,40 @@ const MoreFoodsBoxes = ({
             سینه مرغ گریل شده، قارچ، ذرت، فلفل دلمه
           </span>
         </div>
-        <div className="text-[#ef4123] text-xs flex gap-[2px]">
-          <span>قیمت از</span>
-          <span>{menu.price}</span>
-          <span>تومان</span>
+        <div className="flex  flex-col items-center gap-2 sm:gap-5">
+          <div className="text-[#ef4123] mt-[5px] text-xs flex gap-[2px]">
+            <span>قیمت از</span>
+            <span>{menu.price}</span>
+            <span>تومان</span>
+          </div>
+          <div className="sm:flex hidden justify-center gap-1 items-center">
+            {currentCount > 0 ? (
+              <div className="bg-green-600 mb-2 max-w-[145px] rounded-sm text-white pr-2 pl-2">
+                <span className="text-xs  overflow-hidden">
+                  به سبد خرید اضافه شد ✅
+                </span>
+              </div>
+            ) : (
+              <div className="hover:bg-[#ef5c4d] w-28 flex justify-center hover:text-white text-[#ef5c4d] border border-[#ef5c4d] rounded-xl pt-1 pb-1 px-2">
+                <div
+                  ref={loaderAddTobasket}
+                  className={`${
+                    isStyleLoader ? "block" : "hidden"
+                  } loader-addBasket`}
+                ></div>
+                {!isStyleLoader && (
+                  <button
+                    ref={btnAddToBasket}
+                    type="button"
+                    onClick={() => handleAddToBasketAndStyle(menu)}
+                    className="text-x cursor-pointer"
+                  >
+                    افزودن به سبد خرید
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

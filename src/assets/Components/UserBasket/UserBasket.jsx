@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./UserBasket.css";
+import BoxUserBasket from "./BoxUserBasket/BoxUserBasket";
 export default function UserBasket({
   deleteFoodInUserBasket,
   fainalyAllPriceFoods,
@@ -7,7 +8,8 @@ export default function UserBasket({
   cancelAction,
   arrayUserBasket,
   setArrayUserBasket,
-  setIdProductInBasket
+  setIdProductInBasket,
+  addToBasketUser
 }) {
   const wrapperUserBasket = useRef(null);
 
@@ -23,20 +25,7 @@ export default function UserBasket({
   useEffect(() => {
     styleWrapperUserBasket();
   }, [arrayUserBasket]);
-  // ====================================================================
-  const wrapperDeleteBtn = useRef();
-  const wrapperFoods = useRef()
-  const btnDeleteFood = useRef();
-  const LoaderDeleteFood = useRef();
 
-  function styleAndDeletOnFoods(e ,itemID) {
-    console.log(e.parentElement);
-    
-    setTimeout(() => {
-
-      deleteFoodInUserBasket(itemID);
-    }, 1000);
-  }
 
   return (
     <>
@@ -63,54 +52,7 @@ export default function UserBasket({
             ) : null}
             {arrayUserBasket?.length ? (
               arrayUserBasket?.map((item) => (
-                <div ref={wrapperFoods} className="mt-3 flex gap-2 border-b-1 border-[#dddddd] pb-3">
-                  <div
-                    key={item.id}
-                    className="flex justify-between w-full gap-2"
-                  >
-                    <img
-                      className="w-30 h-20 object-cover rounded-sm"
-                      src={item.image_url}
-                      alt=""
-                    />
-                    <div className="flex justify-around flex-col">
-                      <span className="text-xs leading-4 max-w-[5em] max-h-[1em]">
-                        {item.name}
-                      </span>
-                      <div className="text-xs flex gap-1">
-                        <span>{item.price}</span>
-                        <span>تومان</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center justify-around ">
-                      <div className="flex gap-0.5">
-                        <span className="text-xs text-green-800">
-                          {item.count}
-                        </span>
-                        <span className="text-xs "> عدد</span>
-                      </div>
-                      <div
-                        ref={wrapperDeleteBtn}
-                        onClick={(e) => styleAndDeletOnFoods(e,item.id)}
-                        className=" text-sm pt-1 flex items-center justify-center rounded-sm mb-1 cursor-pointer hover:bg-red-700 transition-all pr-3 pl-3 bg-red-500 pb-1 text-white"
-                      >
-                        <div
-                          ref={LoaderDeleteFood}
-                          className="hidden items-center justify-center"
-                        >
-                          <span className="Loader-Basket"></span>
-                        </div>
-                        <button
-                          ref={btnDeleteFood}
-                          onClick={() => setIdProductInBasket(item.id)}
-                          className=" w-full flex cursor-pointer rounded-sm h-full text-white"
-                        >
-                          حذف
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <BoxUserBasket addToBasketUser={addToBasketUser}  deleteFoodInUserBasket={deleteFoodInUserBasket}  item={item} menu={arrayUserBasket} setIdProductInBasket={setIdProductInBasket}/>
               ))
             ) : (
               <div className="flex flex-col items-center justify-center h-full">
@@ -135,7 +77,7 @@ export default function UserBasket({
                   <span className="text-sm">مجموع هزینه:</span>
                 </div>
                 <div className="flex text-sm items-center gap-1">
-                  <span>{fainalyAllPriceFoods}</span>
+                  <span>{fainalyAllPriceFoods.toLocaleString()}</span>
                   <span>میلیون تومان</span>
                 </div>
               </div>

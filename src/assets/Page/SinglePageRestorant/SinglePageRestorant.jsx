@@ -18,6 +18,7 @@ export default function SinglePageRestorant() {
 
   const [valueForSearch, setValueForSearch] = useState("");
   const [allRestorants, setAllRestorants] = useState(RestorantsData);
+  const [countProduct, setCountProduct] = useState(0);
 
   const paramsID = useParams().ResoruntID;
   let [dataSingleResturants, setDataSingleResturants] = useState({});
@@ -54,8 +55,8 @@ export default function SinglePageRestorant() {
   // ==================    Handle User Basket ================
 
   const [arrayUserBasket, setArrayUserBasket] = useState(() => {
-    const storedBasket = localStorage.getItem("basket");
-    return storedBasket ? JSON.parse(storedBasket) : [];
+    const stored = localStorage.getItem("basket");
+    return stored ? JSON.parse(stored) : [];
   });
 
   const addToBasketUser = (foods) => {
@@ -116,23 +117,20 @@ export default function SinglePageRestorant() {
   // ====================================================================
   // ====================================================================
 
-    
-
-
-
   // ====================================================================
 
   const [idProductInBasket, setIdProductInBasket] = useState();
-  console.log(idProductInBasket);
 
   return (
     <div className="">
       <Topbar
+        arrayUserBasket={arrayUserBasket}
+        setArrayUserBasket={setArrayUserBasket}
+        CalculatorUserBasket={CalculatorUserBasket}
+        addToBasketUser={addToBasketUser}
         setIdProductInBasket={setIdProductInBasket}
         deleteFoodInUserBasket={deleteFoodInUserBasket}
-        arrayUserBasket={arrayUserBasket}
         fainalyAllPriceFoods={fainalyAllPriceFoods}
-        setArrayUserBasket={setArrayUserBasket}
       />
       <HeaderRestorant
         dataSingleResturants={dataSingleResturants}
@@ -174,13 +172,13 @@ export default function SinglePageRestorant() {
       ) : null}
       {statusMenuShow == "resturants-menu" ? (
         <SinglePageRestorantMenu
+          arrayUserBasket={arrayUserBasket}
+          setArrayUserBasket={setArrayUserBasket}
           idProductInBasket={idProductInBasket}
           addToBasketUser={addToBasketUser}
-          arrayUserBasket={arrayUserBasket}
           searchInMenuRestorant={searchInMenuRestorant}
           handleMenuSingleRestoranst={handleMenuSingleRestoranst}
           dataSingleResturants={dataSingleResturants}
-          setArrayUserBasket={setArrayUserBasket}
         />
       ) : null}
       {statusMenuShow == "resturants-infos" ? (

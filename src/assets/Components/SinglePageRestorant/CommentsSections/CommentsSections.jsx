@@ -99,11 +99,11 @@ export default function CommentsSections({ dataSingleResturants, allComments }) 
     const resultAllRatingOfComments = allComment.reduce((acc ,num) => acc+ num , 0)
     const failayScoreCommenst = resultAllRatingOfComments / allComment.length
     
-    
-    
-
 
   // ============================================================
+
+
+
   return (
     <>
       <svg className="hidden">
