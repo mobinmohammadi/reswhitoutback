@@ -12,6 +12,8 @@ import SinglePageRestorantMenu from "./../../Components//SinglePageRestorant/Sin
 import RestorantsData from "../../../../RestorantsData.json";
 import { CartProvider } from "../../Components/Context/Context";
 import FoodBoxes from "../../Components/FoodBoxes/FoodBoxes";
+import categuryTitleFoods from "./../../../Data.js";
+import SliderTitleFoods from "../../Components/SinglePageRestorant/SliderTitleFoods/SliderTitleFoods";
 
 export default function SinglePageRestorant() {
   // const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -116,6 +118,7 @@ export default function SinglePageRestorant() {
   };
   // ====================================================================
   // ====================================================================
+  const [mainCategury, setMainCategury] = useState("ساندویچ حرفه ای");
 
   // ====================================================================
 
@@ -164,6 +167,17 @@ export default function SinglePageRestorant() {
           </ul>
         </div>
       </div>
+
+      <div className=" flex border-t-2 border-solid border-slate-200 mt-4  items-center justify-center pt-4 pb-4 bg-white">
+        <div className="  mx-auto flex items-center  overflow-x-scroll hide-scrollbar justify-center gap-14">
+          {categuryTitleFoods.categuryTitleFoods.map((item) => (
+            <div className="">
+              <SliderTitleFoods mainCategury={mainCategury} setMainCategury={setMainCategury} item={item} />
+            </div>
+          ))}
+        </div>
+      </div>
+
       {statusMenuShow == "resturants-comments" ? (
         <CommentsSections
           dataSingleResturants={dataSingleResturants}

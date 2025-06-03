@@ -110,7 +110,7 @@ const MoreFoodsBoxes = ({
       {/* بخش تصویر و دکمه افزودن */}
       <div className="flex justify-center sm:h-[150px] flex-col items-center">
         <img
-          className="w-32 text-center items-center sm:w-[120px] sm:h-[120px] sm:object-cover  h-24 2xs:w-40 rounded-2xl"
+          className="w-32 text-center bg-slate-200 items-center sm:w-[180px] sm:h-[120px] sm:object-cover  h-24 2xs:w-40 rounded-2xl"
           src={menu.image_url}
           alt="بدون عکس ..."
         />
@@ -146,7 +146,7 @@ const MoreFoodsBoxes = ({
         </div>
       </div>
 
-      <div className="flex 2xs:pl-5 2xs:pr-2 sm:justify-start  2xs:h-[6rem] flex-col gap-2 2xs:items-start">
+      <div className="flex 2xs:pl-5 2xs:pr-2 items-center sm:justify-between flex-col gap-2 2xs:items-start">
         <div className="flex gap-1 flex-col">
           <span className="text-sm 2xs:text-md text-right font-bold">
             {menu.name}
@@ -155,7 +155,7 @@ const MoreFoodsBoxes = ({
             سینه مرغ گریل شده، قارچ، ذرت، فلفل دلمه
           </span>
         </div>
-        <div className="flex  flex-col items-center gap-2 sm:gap-5">
+        <div className="flex  flex-col gap-2 sm:gap-5">
           <div className="text-[#ef4123] mt-[5px] text-xs flex gap-[2px]">
             <span>قیمت از</span>
             <span>{menu.price}</span>
@@ -163,7 +163,7 @@ const MoreFoodsBoxes = ({
           </div>
           <div className="sm:flex hidden justify-center gap-1 items-center">
             {currentCount > 0 ? (
-              <div className="bg-green-600 mb-2 max-w-[145px] rounded-sm text-white pr-2 pl-2">
+              <div className="bg-green-600 max-w-[145px] rounded-sm text-white pr-2 pl-2">
                 <span className="text-xs  overflow-hidden">
                   به سبد خرید اضافه شد ✅
                 </span>

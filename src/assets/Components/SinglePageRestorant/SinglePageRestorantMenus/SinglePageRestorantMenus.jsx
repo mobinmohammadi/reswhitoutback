@@ -9,7 +9,7 @@ export default function SinglePageRestorantMenu({
   setArrayUserBasket,
   addToBasketUser,
   idProductInBasket
-  
+
   
 }) {
   const [menusResturants, setMenusResturants] = useState([]);
@@ -36,7 +36,7 @@ export default function SinglePageRestorantMenu({
             <use href="#magnifying-glass"></use>
           </svg>
         </div>
-        <div className=" grid grid-cols-1 sm:grid-cols-2   xl:grid-cols-3 w-[97%] sm:w-auto gap-3">
+        <div className=" grid grid-cols-1 sm:grid-cols-2   xl:grid-cols-3 w-[90%]  gap-3">
           {searchInMenuRestorant.length
             ? searchInMenuRestorant.map((menu, index) => (
                 <div key={index + 1} className="">

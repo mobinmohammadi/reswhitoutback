@@ -2941,4 +2941,13 @@ const dataAllRestorants = [
 
 ];
 
-export default { baseUrl,  DataAllCities,dataAllRestorants, AllCitis, PreeSeeCitys, allCategury };
+const categuryTitleFoods = [
+  {id : 1 , title : "ساندویچ حرفه ای" , img : "../../images/TitleFoods/icon-burger.png"},
+  {id : 2 , title : "ساندویچ نون سفید" , img : "../../images/TitleFoods/icon-sandwich.png"},
+  {id : 3 , title : "ساندویچ ویژه" , img : "../../images/TitleFoods/icon-hotdog.png"},
+  {id : 4 , title : "پرس نون سفید" , img : "../../images/TitleFoods/icon-pasta.png"},
+  {id : 5 , title : "دسر" , img : "../../images/TitleFoods/icon-appetizer.png"},
+  {id : 6 , title : "نوشیدنی" , img : "../../images/TitleFoods/icon-beverage.png"},
+]
+
+export default { baseUrl,categuryTitleFoods,  DataAllCities,dataAllRestorants, AllCitis, PreeSeeCitys, allCategury };
