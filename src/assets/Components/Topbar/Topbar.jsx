@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import EasyAddress from "../EasyAddress/EasyAddress";
 import UserBasket from "../UserBasket/UserBasket";
@@ -48,10 +48,26 @@ export default function Topbar({
     }, 0.7);
   };
 
+  const [isFixedTopBar , setIsFixedTopBar] = useState(false)
+  const FixedTopBarHandler = () => {
+    window.addEventListener("scroll" , () => {
+      if(window.scrollY > 100){
+        setIsFixedTopBar(true)
+        
+      }
+      else{
+        setIsFixedTopBar(false)
+
+      }
+    })
+  }
+  useEffect(() => {
+    FixedTopBarHandler()
+  },[])
   return (
     <>
       <svg className="hidden"></svg>
-      <div className="">
+      <div className={`${isFixedTopBar ? "fixed top-0 z-30 w-full transition-all" : ""}`}>
         <div className="bg-white relative">
           <div className="flex relative space-y-2 pt-3 justify-between  items-center pr-4 pl-4   ">
             {isUserLogin ? (

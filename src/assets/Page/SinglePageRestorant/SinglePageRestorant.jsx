@@ -121,6 +121,26 @@ export default function SinglePageRestorant() {
   const [mainCategury, setMainCategury] = useState("ساندویچ حرفه ای");
 
   // ====================================================================
+  // ========================================================= ===========
+
+  const [isActiveCateguryFoods, setIsActiveCateguryFoods] = useState(false);
+
+  const wrapperCateguryFoods = useRef(null);
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 450) {
+      setIsActiveCateguryFoods(true)
+    }
+    else{
+      setIsActiveCateguryFoods(false)
+    }
+    // else {
+    //   console.log("");
+
+    // }
+  });
+
+  // ====================================================================
 
   const [idProductInBasket, setIdProductInBasket] = useState();
 
@@ -168,13 +188,23 @@ export default function SinglePageRestorant() {
         </div>
       </div>
 
-      <div className=" flex border-t-2 border-solid border-slate-200 mt-4  items-center justify-center pt-4 pb-4 bg-white">
-        <div className="  mx-auto flex items-center  overflow-x-scroll hide-scrollbar justify-center gap-14">
-          {categuryTitleFoods.categuryTitleFoods.map((item) => (
-            <div className="">
-              <SliderTitleFoods mainCategury={mainCategury} setMainCategury={setMainCategury} item={item} />
-            </div>
-          ))}
+      <div
+        className={` ${
+          isActiveCateguryFoods ? "opacity-100 visible z-20  top-12 sm:top-14 fixed flex transition-all" : "opacity-0 invisible hidden "
+        } w-full shadow-2xs`}
+      >
+        <div className=" flex w-full border-solid    items-center justify-center pt-3 bg-white">
+          <div className="  mx-auto flex items-center  overflow-x-scroll hide-scrollbar justify-center gap-14">
+            {categuryTitleFoods.categuryTitleFoods.map((item) => (
+              <div className="">
+                <SliderTitleFoods
+                  mainCategury={mainCategury}
+                  setMainCategury={setMainCategury}
+                  item={item}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
