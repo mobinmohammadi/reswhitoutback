@@ -52,7 +52,8 @@ export default function UserBasket({
             ) : null}
             {arrayUserBasket?.length ? (
               arrayUserBasket?.map((item) => (
-                <BoxUserBasket addToBasketUser={addToBasketUser}  deleteFoodInUserBasket={deleteFoodInUserBasket}  item={item} menu={arrayUserBasket} setIdProductInBasket={setIdProductInBasket}/>
+                <BoxUserBasket arrayUserBasket={arrayUserBasket}
+setArrayUserBasket={setArrayUserBasket} addToBasketUser={addToBasketUser}  deleteFoodInUserBasket={deleteFoodInUserBasket}  item={item} menu={arrayUserBasket} setIdProductInBasket={setIdProductInBasket}/>
               ))
             ) : (
               <div className="flex flex-col items-center justify-center h-full">

@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function BoxUserBasket({ CalculatorUserBasket,addToBasketUser , item ,menu , setIdProductInBasket , deleteFoodInUserBasket }) {
+export default function BoxUserBasket({ arrayUserBasket ,
+setArrayUserBasket, CalculatorUserBasket,addToBasketUser , item ,menu , setIdProductInBasket , deleteFoodInUserBasket }) {
   const [count, setCount] = useState(0);
 
   // وضعیت لودر برای دکمه "افزودن به سبد خرید"
   const [isStyleLoader, setIsStyleLoader] = useState(false);
 
-  // سبد خرید که از localStorage بارگذاری میشه (اولین بار)
-  const [arrayUserBasket, setArrayUserBasket] = useState(() => {
-    const stored = localStorage.getItem("basket");
-    return stored ? JSON.parse(stored) : [];
-  });
+  // // سبد خرید که از localStorage بارگذاری میشه (اولین بار)
+  // const [arrayUserBasket, setArrayUserBasket] = useState(() => {
+  //   const stored = localStorage.getItem("basket");
+  //   return stored ? JSON.parse(stored) : [];
+  // });
 
 
 
